@@ -1,0 +1,79 @@
+/* تنظیمات بدنه برای جلوگیری از اسکرول اضافی در موبایل */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* کانتینر عمومی صفحات بازی برای موبایل */
+.loading-container, .main-menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+/* ========== فونت  ========== */
+/* تامام فونت های بازی از اینجا خونده میشه  */
+/* معرفی فونت ها و کد های اعمال فونت در کل پروژه */
+
+@font-face {
+  font-family: "Lalezar";
+  src: url("../assets/fonts/Lalezar/Lalezar-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../assets/fonts/Vazirmatn/static/Vazirmatn-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../assets/fonts/Vazirmatn/static/Vazirmatn-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Vazirmatn", sans-serif;
+  direction: rtl;
+}
+
+h1,
+h2,
+h3,
+.play {
+  font-family: "Lalezar", sans-serif;
+}
