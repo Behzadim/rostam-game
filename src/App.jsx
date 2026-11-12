@@ -4,7 +4,8 @@ const App = () => {
     const [loading, setLoading] = useState()
     return (
         <div>
-            <p>کیر</p>
+            <>کیر</>
         </div>
     )
 }
+export default App;
