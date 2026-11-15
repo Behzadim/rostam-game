@@ -1,31 +1,41 @@
-// این صفحه مربوط به لودینگ است 
-
 import { useEffect, useState } from 'react';
-import { useGameStore } from '../../store/gameStore';
-// ایمپورت مستقیم عکس لودینگ برای جلوگیری از سیاه شدن صفحه
-import loadingBg from '../../assets/images/loading-bg.jpg';
+import { useGameStore } from '../../game/gameStore/gameStore';
+import loadingBg from '../../assets/images/loading-bg.jpg'; // اگر پسوند عکس لودینگ png است به .png تغییر دهید
 import "../../styles/App.css";
 
 export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const setGameStage = useGameStore((state) => state.setGameStage);
 
+  // ۱. فقط افزایش درصد لودینگ تا ۱۰۰
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress >= 100) {
+      setProgress((prev) => {
+        if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => {
-            setGameStage('MENU');
-          }, 0);
           return 100;
         }
-        return oldProgress + 10;
+        return prev + 10;
       });
     }, 150);
 
     return () => clearInterval(interval);
-  }, [setGameStage]);
+  }, []);
+
+  // ۲. انتقال قطعی به منوی اصلی به محض رسیدن به ۱۰۰ درصد
+  useEffect(() => {
+    if (progress >= 100) {
+      const timer = setTimeout(() => {
+        if (typeof setGameStage === 'function') {
+          setGameStage('MENU');
+        } else {
+          console.error("خطا: تابع setGameStage در استور پیدا نشد!");
+        }
+      }, 200);
+
+      return () => clearTimeout(timer);
+    }
+  }, [progress, setGameStage]);
 
   return (
     <div
@@ -44,6 +54,7 @@ export default function LoadingScreen() {
             <div
               className="progress-bar bg-warning progress-bar-striped progress-bar-animated"
               style={{ width: `${progress}%` }}
+              role="progressbar"
             ></div>
           </div>
         </div>

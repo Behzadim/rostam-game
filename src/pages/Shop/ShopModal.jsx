@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useGameStore } from '../../store/gameStore';
-
+import { useGameStore } from '../../game/gameStore/gameStore';
 const SHOP_ITEMS = [
     {
         id: 'nooshdaroo',

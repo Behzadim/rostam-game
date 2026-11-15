@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useGameStore } from '../../store/gameStore';
+import { useGameStore } from '../../game/gameStore/gameStore';
 import { initAndPlayMusic, toggleMuteMusic } from '../../utils/soundManager';
+import { KHANS_DATA } from '../../game/data/khansData';
 import ShopModal from '../Shop/ShopModal';
+import EquipmentModal from '../Shop/EquipmentModal';
 import mainBg from '../../assets/images/main-bg.png';
 import "../../styles/App.css";
 
@@ -9,10 +11,13 @@ export default function MainMenu() {
   const [isMuted, setIsMuted] = useState(false);
 
   const coins = useGameStore((state) => state.coins ?? 1500);
+  const currentKhan = useGameStore((state) => state.currentKhan ?? 1);
   const addCoins = useGameStore((state) => state.addCoins);
   const activeModal = useGameStore((state) => state.activeModal);
   const setActiveModal = useGameStore((state) => state.setActiveModal);
   const setGameStage = useGameStore((state) => state.setGameStage);
+
+  const khanInfo = KHANS_DATA[currentKhan] || KHANS_DATA[1];
 
   useEffect(() => {
     initAndPlayMusic();
@@ -32,13 +37,10 @@ export default function MainMenu() {
         backgroundImage: `url(${mainBg})`
       }}
     >
-      {/* ==================== پنل فرماندهی در سمت راست بالای صفحه ==================== */}
+      {/* پنل فرماندهی در سمت راست بالای صفحه */}
       <div className="top-right-command-hub">
 
-        {/* ردیف اول: سکه و دکمه صدا */}
         <div className="hub-status-row">
-
-          {/* دکمه قطع و وصل صدا */}
           <button
             className={`shahnameh-icon-btn ${isMuted ? 'muted' : ''}`}
             onClick={handleToggleSound}
@@ -59,7 +61,6 @@ export default function MainMenu() {
             )}
           </button>
 
-          {/* باکس نمایش سکه‌ها (درهم زرین) */}
           <div className="shahnameh-coin-box">
             <button
               className="coin-plus-btn"
@@ -77,28 +78,24 @@ export default function MainMenu() {
               </svg>
             </div>
           </div>
-
         </div>
 
-        {/* ردیف دوم: دکمه اصلی شروع رزم */}
+        {/* دکمه اصلی شروع رزم (خطی بر اساس خوان فعلی) */}
         <button
           className="shahnameh-btn battle-start-btn"
           onClick={() => setGameStage('PLAYING')}
         >
-          <div className="btn-ornament-right"></div>
           <div className="battle-btn-text">
             <span className="battle-main-title">آغاز رزم</span>
-            <span className="battle-sub-title">ورود به هفت‌خوان رستم</span>
+            <span className="battle-sub-title">{khanInfo.title}</span>
           </div>
           <svg viewBox="0 0 24 24" width="28" height="28" stroke="#fff3b0" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"></polyline>
-            <line x1="13" y1="19" x2="19" y2="13"></line>
-            <line x1="16" y1="16" x2="20" y2="20"></line>
-            <line x1="19" y1="21" x2="21" y2="19"></line>
+            <path d="M14.5 2L22 9.5l-4.5 4.5-7.5-7.5L14.5 2z" />
+            <path d="M11 8.5L3 16.5V21h4.5l8-8" />
           </svg>
         </button>
 
-        {/* ردیف سوم: دکمه‌های بازارچه (فروشگاه) و رخت‌خانه (سلاح و زره) */}
+        {/* دکمه‌های بازارچه و سلاح و زره */}
         <div className="hub-sub-actions">
           <button
             className={`shahnameh-btn sub-action-btn ${activeModal === 'SHOP' ? 'is-active' : ''}`}
@@ -125,8 +122,9 @@ export default function MainMenu() {
 
       </div>
 
-      {/* ==================== نمایش پنجره‌های مودال ==================== */}
+      {/* نمایش پنجره‌های مودال */}
       {activeModal === 'SHOP' && <ShopModal />}
+      {activeModal === 'EQUIPMENT' && <EquipmentModal />}
     </div>
   );
 }
