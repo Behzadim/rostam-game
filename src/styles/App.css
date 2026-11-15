@@ -86,3 +86,461 @@
     0 4px 12px rgba(0, 0, 0, 0.7),
     inset 0 0 8px rgba(224, 108, 117, 0.2);
 }
+
+/* ==================== استایل پنجره‌های مودال (فروشگاه و تجهیزات) ==================== */
+.rpg-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+  padding: 16px;
+  direction: rtl;
+}
+
+.rpg-modal-box {
+  width: 100%;
+  max-width: 520px;
+  background: linear-gradient(180deg, #24180d 0%, #120b05 100%);
+  border: 2px solid #d4af37;
+  border-radius: 20px;
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.9),
+    inset 0 0 15px rgba(212, 175, 55, 0.2);
+  padding: 20px;
+  color: #f5e6c8;
+  animation: modalPop 0.2s ease-out;
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.rpg-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.rpg-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #ffd700;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.rpg-alert {
+  padding: 8px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.alert-success-rpg {
+  background: rgba(40, 167, 69, 0.25);
+  border: 1px solid #2ecc71;
+  color: #a3ffb8;
+}
+
+.alert-error-rpg {
+  background: rgba(220, 53, 69, 0.25);
+  border: 1px solid #e74c3c;
+  color: #ffb3b3;
+}
+
+.rpg-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shop-item-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.shop-item-icon {
+  font-size: 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.shop-item-info {
+  flex: 1;
+}
+
+.shop-item-title {
+  font-weight: 800;
+  color: #fff3b0;
+  font-size: 1rem;
+}
+
+.shop-item-owned {
+  background: rgba(212, 175, 55, 0.2);
+  color: #ffd700;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.shop-item-desc {
+  font-size: 0.8rem;
+  color: #bba882;
+  margin-top: 4px;
+}
+
+.rpg-buy-btn {
+  background: linear-gradient(180deg, #ffd700 0%, #c59b27 100%);
+  border: 1px solid #fff3b0;
+  color: #2b1700;
+  font-weight: 900;
+  border-radius: 12px;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  cursor: pointer;
+  min-width: 75px;
+}
+
+.rpg-buy-btn.disabled {
+  background: #3a3228;
+  border-color: #55483a;
+  color: #887865;
+  cursor: not-allowed;
+}
+
+/* ۱. استایل صفحه لودینگ */
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 3rem 2rem;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+.loading-content {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* ۲. کانتینر اصلی منو */
+.main-menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  z-index: 9999;
+  direction: rtl;
+}
+
+/* ==================== پنل فرماندهی سمت راست بالا ==================== */
+.top-right-command-hub {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 290px;
+  z-index: 10000;
+}
+
+/* ردیف اول: صدا و سکه */
+.hub-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* باکس سکه به سبک کتیبه زرین */
+.shahnameh-coin-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 19, 12, 0.92) 0%,
+    rgba(14, 9, 5, 0.96) 100%
+  );
+  border: 2px solid #c59b27;
+  border-radius: 12px;
+  padding: 6px 10px;
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.75),
+    inset 0 0 10px rgba(197, 155, 39, 0.2);
+}
+
+.coin-emblem {
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.7));
+}
+
+.coin-text {
+  color: #ffe89e;
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  letter-spacing: 0.5px;
+}
+
+.coin-plus-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffd700 0%, #b38000 100%);
+  border: 1px solid #fff5c0;
+  color: #2b1700;
+  font-weight: 900;
+  font-size: 1.15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 3px 0 #704f00;
+  transition: all 0.1s ease;
+}
+
+/* افکت Active دکمه افزایش سکه */
+.coin-plus-btn:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 0 0 #704f00,
+    inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(180deg, #e6c200 0%, #996d00 100%);
+}
+
+/* دکمه آیکونی صدا */
+.shahnameh-icon-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(38, 25, 15, 0.92) 0%,
+    rgba(16, 10, 6, 0.96) 100%
+  );
+  border: 2px solid #c59b27;
+  box-shadow:
+    0 4px 0 #6e5211,
+    0 6px 14px rgba(0, 0, 0, 0.75);
+  color: #ffd700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: all 0.12s ease;
+}
+
+.shahnameh-icon-btn:hover {
+  border-color: #ffe885;
+  color: #fff6cc;
+}
+
+.shahnameh-icon-btn:active {
+  transform: translateY(4px);
+  box-shadow:
+    0 0 0 #6e5211,
+    0 2px 6px rgba(0, 0, 0, 0.8),
+    inset 0 0 12px rgba(255, 215, 0, 0.35);
+}
+
+.shahnameh-icon-btn.muted {
+  border-color: #9e3a3a;
+  box-shadow:
+    0 4px 0 #591d1d,
+    0 6px 14px rgba(0, 0, 0, 0.75);
+  color: #ff7b7b;
+}
+
+.shahnameh-icon-btn.muted:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #591d1d;
+}
+
+/* ==================== استایل پایه دکمه‌های شاهنامه ==================== */
+.shahnameh-btn {
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 14px;
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* دکمه اصلی «آغاز رزم» با تم زرشکی-طلایی سلطنتی (هماهنگ با شنل رستم) */
+.battle-start-btn {
+  width: 100%;
+  padding: 12px 18px;
+  background: linear-gradient(180deg, #8f1d1d 0%, #5e0f0f 60%, #3d0707 100%);
+  border: 2px solid #e5b842;
+  /* سایه ضخیم زیر دکمه برای ایجاد حس سه‌بعدی و سنگی/فلزی */
+  box-shadow:
+    0 5px 0 #7a5813,
+    0 10px 20px rgba(0, 0, 0, 0.85),
+    inset 0 1px 1px rgba(255, 235, 168, 0.45);
+  color: #fff3b0;
+}
+
+.battle-start-btn:hover {
+  background: linear-gradient(180deg, #a62323 0%, #6e1212 60%, #4a0909 100%);
+  border-color: #ffdf73;
+  box-shadow:
+    0 5px 0 #8c6516,
+    0 12px 24px rgba(0, 0, 0, 0.9),
+    0 0 15px rgba(229, 184, 66, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* حالت Active (هنگام کلیک یا لمس روی موبایل) برای دکمه آغاز رزم */
+.battle-start-btn:active {
+  transform: translateY(5px);
+  background: linear-gradient(180deg, #520c0c 0%, #751616 100%);
+  border-color: #ffd700;
+  box-shadow:
+    0 0px 0 #7a5813,
+    0 3px 8px rgba(0, 0, 0, 0.9),
+    inset 0 3px 10px rgba(0, 0, 0, 0.75),
+    0 0 20px rgba(255, 180, 0, 0.6);
+}
+
+.battle-btn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.25;
+}
+
+.battle-main-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #ffea9f;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.battle-sub-title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #e0b679;
+}
+
+/* ردیف سوم: دکمه‌های فرعی (بازارچه و سلاح) در دو ستون کنار هم */
+.hub-sub-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.sub-action-btn {
+  flex: 1;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(36, 25, 16, 0.94) 0%,
+    rgba(18, 12, 7, 0.98) 100%
+  );
+  border: 2px solid #b88b28;
+  box-shadow:
+    0 4px 0 #5e440e,
+    0 8px 16px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  color: #f5e2ba;
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+
+.sub-action-btn:hover {
+  border-color: #ffd700;
+  color: #ffffff;
+  background: linear-gradient(
+    180deg,
+    rgba(48, 33, 21, 0.96) 0%,
+    rgba(24, 16, 9, 0.98) 100%
+  );
+}
+
+/* حالت Active هنگام فشردن دکمه‌های بازارچه و سلاح + حالت باز بودن پنجره (is-active) */
+.sub-action-btn:active,
+.sub-action-btn.is-active {
+  transform: translateY(4px);
+  border-color: #ffe680;
+  color: #ffd700;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 13, 8, 0.98) 0%,
+    rgba(42, 29, 17, 0.95) 100%
+  );
+  box-shadow:
+    0 0 0 #5e440e,
+    0 2px 6px rgba(0, 0, 0, 0.85),
+    inset 0 2px 8px rgba(0, 0, 0, 0.8),
+    0 0 14px rgba(255, 215, 0, 0.35);
+}
+
+/* تنظیم خودکار برای صفحه‌های خیلی کوچک موبایل */
+@media (max-width: 480px) {
+  .top-right-command-hub {
+    top: 16px;
+    right: 16px;
+    width: 250px;
+  }
+}

@@ -1,3 +1,5 @@
+// این صفحه مربوط به لودینگ است 
+
 import { useEffect, useState } from 'react';
 import { useGameStore } from '../../store/gameStore';
 // ایمپورت مستقیم عکس لودینگ برای جلوگیری از سیاه شدن صفحه
