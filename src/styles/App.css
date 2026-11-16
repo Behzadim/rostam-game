@@ -485,7 +485,7 @@
 .hub-sub-actions {
   display: flex;
   gap: 10px;
-  width: 100%;
+  width: 95%;
 }
 
 .sub-action-btn {
@@ -1154,17 +1154,37 @@
     min-width: 200px;
   }
 
-  .main-menu-container .game-title-block {
+  /* .main-menu-container .game-title-block {
     position: absolute;
-    top: calc(var(--u) * 46);
+    top: calc(var(--u) * 0);
     left: 50%;
     transform: translateX(-50%);
-  }
-  .main-menu-container .game-title { font-size: max(34px, calc(var(--u) * 108)); }
+
+  } */
+.game-title-block {
+  position: absolute;
+  top: -72%;
+  left: 10%;
+  transform: translate(-50%, -50%); /* انتقال دقیق به نقطه وسط صفحه */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  pointer-events: none; /* تا مانع کلیک روی موارد زیرین نشود */
+}
+
+.game-title-block img {
+  max-width: 450px;
+  width: 25vw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.9));
+}
+  .main-menu-container .game-title { font-size: max(25px, calc(var(--u) * 80)); }
   .main-menu-container .game-subtitle {
     margin-top: calc(var(--u) * 4);
     padding: max(2px, calc(var(--u) * 5)) max(20px, calc(var(--u) * 44));
-    font-size: max(11px, calc(var(--u) * 30));
+    font-size: max(11px, calc(var(--u) * 20));
   }
 
   .main-menu-container .hub-status-row {
@@ -1261,7 +1281,10 @@
   .main-menu-container .hub-sub-actions     { order: 8; flex: 0 0 auto; }
 
   .main-menu-container .player-profile { width: 100%; }
-  .main-menu-container .player-info    { height: 44px; }
+  .main-menu-container .player-info { 
+    height: 44px,
+    
+  }
 
   .main-menu-container .hub-status-row .shahnameh-coin-box {
     flex: 1 1 0;

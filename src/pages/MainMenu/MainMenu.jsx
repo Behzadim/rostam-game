@@ -5,8 +5,8 @@ import { KHANS_DATA } from '../../game/data/khansData';
 import ShopModal from '../Shop/ShopModal';
 import EquipmentModal from '../Shop/EquipmentModal';
 import mainBg from '../../assets/images/main-bg.png';
+import TitelNeme from '../../assets/images/titel-neme.png'
 import "../../styles/App.css";
-
 const KHAN_ORDINALS = ['اول', 'دوم', 'سوم', 'چهارم', 'پنجم', 'ششم', 'هفتم'];
 
 export default function MainMenu() {
@@ -89,10 +89,8 @@ export default function MainMenu() {
 
       {/* عنوان بازی */}
       <div className="game-title-block">
-        <div className="game-title">شاهنامه</div>
-        <div className="game-subtitle">هفت خان رستم</div>
+       <img src={TitelNeme} alt="notFund" />
       </div>
-
       {/* ستون سمت چپ */}
       <div className="side-menu">
         <button className="shahnameh-btn nav-tile" onClick={() => showSoon('جایزه روزانه')}>
