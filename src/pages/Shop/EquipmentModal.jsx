@@ -38,7 +38,7 @@ export default function EquipmentModal() {
 
                     {/* کارت ارتقای گرز گاوسر */}
                     <div className="shop-item-card">
-                        <div className="shop-item-icon">🔨</div>
+                        <div className="shop-item-icon">🔨{/* اینجا باید یک  عکس گرز جذاب قراربگیرد */}</div>
                         <div className="shop-item-info">
                             <div className="d-flex align-items-center gap-2">
                                 <span className="shop-item-title">گرز گاوسر</span>
@@ -62,7 +62,7 @@ export default function EquipmentModal() {
                         <div className="shop-item-icon">🛡️</div>
                         <div className="shop-item-info">
                             <div className="d-flex align-items-center gap-2">
-                                <span className="shop-item-title">زره ببر بیان و شنل</span>
+                                <span className="shop-item-title"> لباس رزم  </span>
                                 <span className="shop-item-owned">سطح {armorLevel}</span>
                             </div>
                             <p className="shop-item-desc m-0">
