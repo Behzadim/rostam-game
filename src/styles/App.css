@@ -43,13 +43,13 @@
   right: 24px;
   width: 54px;
   height: 54px;
-  border-radius: 14px; /* گوشه‌های گرد به سبک بازی‌های موبایلی */
-  background: radial-gradient(
-    circle,
-    rgba(45, 32, 18, 0.9) 0%,
-    rgba(18, 12, 6, 0.95) 100%
-  );
-  border: 2px solid #d4af37; /* قاب طلایی */
+  border-radius: 14px;
+  /* گوشه‌های گرد به سبک بازی‌های موبایلی */
+  background: radial-gradient(circle,
+      rgba(45, 32, 18, 0.9) 0%,
+      rgba(18, 12, 6, 0.95) 100%);
+  border: 2px solid #d4af37;
+  /* قاب طلایی */
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.7),
     inset 0 0 8px rgba(212, 175, 55, 0.3);
@@ -120,6 +120,7 @@
     transform: scale(0.92);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
@@ -306,11 +307,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(
-    180deg,
-    rgba(28, 19, 12, 0.92) 0%,
-    rgba(14, 9, 5, 0.96) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(28, 19, 12, 0.92) 0%,
+      rgba(14, 9, 5, 0.96) 100%);
   border: 2px solid #c59b27;
   border-radius: 12px;
   padding: 6px 10px;
@@ -365,11 +364,9 @@
   width: 46px;
   height: 46px;
   border-radius: 12px;
-  background: linear-gradient(
-    180deg,
-    rgba(38, 25, 15, 0.92) 0%,
-    rgba(16, 10, 6, 0.96) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(38, 25, 15, 0.92) 0%,
+      rgba(16, 10, 6, 0.96) 100%);
   border: 2px solid #c59b27;
   box-shadow:
     0 4px 0 #6e5211,
@@ -493,11 +490,9 @@
   justify-content: center;
   gap: 8px;
   padding: 10px 12px;
-  background: linear-gradient(
-    180deg,
-    rgba(36, 25, 16, 0.94) 0%,
-    rgba(18, 12, 7, 0.98) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(36, 25, 16, 0.94) 0%,
+      rgba(18, 12, 7, 0.98) 100%);
   border: 2px solid #b88b28;
   box-shadow:
     0 4px 0 #5e440e,
@@ -511,11 +506,9 @@
 .sub-action-btn:hover {
   border-color: #ffd700;
   color: #ffffff;
-  background: linear-gradient(
-    180deg,
-    rgba(48, 33, 21, 0.96) 0%,
-    rgba(24, 16, 9, 0.98) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(48, 33, 21, 0.96) 0%,
+      rgba(24, 16, 9, 0.98) 100%);
 }
 
 /* حالت Active هنگام فشردن دکمه‌های بازارچه و سلاح + حالت باز بودن پنجره (is-active) */
@@ -524,11 +517,9 @@
   transform: translateY(4px);
   border-color: #ffe680;
   color: #ffd700;
-  background: linear-gradient(
-    180deg,
-    rgba(20, 13, 8, 0.98) 0%,
-    rgba(42, 29, 17, 0.95) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(20, 13, 8, 0.98) 0%,
+      rgba(42, 29, 17, 0.95) 100%);
   box-shadow:
     0 0 0 #5e440e,
     0 2px 6px rgba(0, 0, 0, 0.85),
@@ -544,6 +535,7 @@
     width: 250px;
   }
 }
+
 /* ==================== استایل‌های میدان نبرد و کنترل‌های لمسی ==================== */
 .battle-screen-wrapper {
   position: fixed;
@@ -661,7 +653,8 @@
   justify-content: space-between;
   align-items: flex-end;
   z-index: 100;
-  direction: ltr; /* چپ و راست در سمت چپ صفحه، ضربه و پرش در سمت راست */
+  direction: ltr;
+  /* چپ و راست در سمت چپ صفحه، ضربه و پرش در سمت راست */
 }
 
 .touch-dpad,
@@ -674,11 +667,9 @@
   width: 68px;
   height: 68px;
   border-radius: 18px;
-  background: linear-gradient(
-    180deg,
-    rgba(40, 27, 16, 0.88) 0%,
-    rgba(18, 12, 7, 0.94) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(40, 27, 16, 0.88) 0%,
+      rgba(18, 12, 7, 0.94) 100%);
   border: 2px solid #d4af37;
   color: #ffd700;
   font-weight: 900;
@@ -713,6 +704,7 @@
     0 5px 0 #4a0909,
     0 8px 20px rgba(0, 0, 0, 0.85);
 }
+
 /* =====================================================
    منوی اصلی مثل طرح مرجع | نسخه ۲
    انتهای App.css بچسبان. فایل قبلی menu-layout.css رو حذف کن
@@ -738,91 +730,74 @@
   }
 }
 
-.top-right-command-hub { display: contents; }
+.top-right-command-hub {
+  display: contents;
+}
 
 /* =====================================================
    ظاهر اجزا (مشترک بین افقی و عمودی)
    ===================================================== */
 
 /* ---------- پروفایل ---------- */
-.main-menu-container .player-profile {
+.player-profile {
   position: relative;
-  z-index: 5;
-  display: flex;
-  align-items: center;
+  width: min(94vw, 560px);
+  aspect-ratio: 2172 / 724;
+  background: url('../assets/images/profail.png') center / 100% 100% no-repeat;
+  container-type: inline-size;
   direction: ltr;
-  pointer-events: none;
 }
 
-.main-menu-container .player-avatar {
-  position: relative;
-  z-index: 2;
-  flex: 0 0 auto;
-  width: max(48px, calc(var(--u) * 92));
-  height: max(48px, calc(var(--u) * 92));
-  border-radius: 50%;
-  border: max(2px, calc(var(--u) * 4)) solid var(--br-hi);
-  background: radial-gradient(circle at 50% 35%, #5b3a22, #1a0e08);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-}
-.main-menu-container .player-avatar svg { width: 100%; height: 100%; display: block; }
+.player-avatar { display: none; }
 
-.main-menu-container .player-info {
-  flex: 1 1 auto;
-  min-width: 0;
+.player-info,
+.player-level-row { display: contents; }
+
+.player-name {
+  position: absolute;
+  left: 50%;
+  width: 20%;
+  top: 41%;
+  text-align: center;
   direction: rtl;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: max(2px, calc(var(--u) * 4));
-  margin-left: calc(var(--u) * -18);
-  padding: 0 max(10px, calc(var(--u) * 16)) 0 max(22px, calc(var(--u) * 30));
-  height: max(34px, calc(var(--u) * 58));
-  background: linear-gradient(90deg, rgba(14, 8, 5, 0.92), rgba(46, 31, 20, 0.92));
-  border: 1.5px solid var(--br);
-  border-radius: 4px 10px 10px 4px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  font-size: 3cqw;
+  line-height: 1;
+  font-weight: 700;
+  color: #e9c46a;
+  text-shadow: 0 1px 2px #000, 0 0 6px rgba(255, 190, 70, 0.5);
 }
 
-.main-menu-container .player-name {
-  font-weight: 900;
-  font-size: max(13px, calc(var(--u) * 26));
-  line-height: 1.1;
-  color: #f6e4b0;
-  text-shadow: 0 1px 2px #000;
-}
-
-.main-menu-container .player-level-row {
-  display: flex;
-  align-items: center;
-  direction: ltr;
-  gap: max(5px, calc(var(--u) * 10));
-}
-
-.main-menu-container .player-level {
-  flex: 0 0 auto;
+.player-level {
+  position: absolute;
+  left: 30%;
+  width: 20%;
+  top: 41%;
+  text-align: center;
+  font-size: 4.3cqw;
+  line-height: 1;
   font-weight: 800;
-  font-size: max(10px, calc(var(--u) * 20));
-  color: #f6e4b0;
+  letter-spacing: 0.04em;
+  color: #ffd36a;
+  text-shadow: 0 2px 3px #000, 0 0 10px rgba(255, 180, 40, 0.6);
 }
 
-.main-menu-container .player-xp-bar {
-  flex: 1 1 auto;
-  height: max(6px, calc(var(--u) * 14));
-  border-radius: 99px;
-  background: #090504;
-  border: 1px solid rgba(154, 116, 64, 0.7);
+.player-xp-bar {
+  position: absolute;
+  left: 32.2%;
+  top: 60.2%;
+  width: 51.3%;
+  height: 8.2%;
+  background: #070707;
+  box-shadow: inset 0 0 6px #000;
   overflow: hidden;
 }
 
-.main-menu-container .player-xp-fill {
+.player-xp-fill {
   height: 100%;
-  background: linear-gradient(180deg, #ffe680, #e0a400);
-  box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+  background: linear-gradient(#fff3b0, #f5c542 45%, #b9801a);
+  box-shadow: 0 0 8px rgba(255, 200, 70, 0.7);
   transition: width 0.4s ease;
-}
-
+} 
 /* ---------- عنوان ---------- */
 .main-menu-container .game-title-block {
   position: relative;
@@ -902,7 +877,10 @@
   border-color: var(--sh-gold-soft);
   background: linear-gradient(180deg, #ffe680 0%, var(--sh-gold) 55%, #c68a00 100%);
 }
-.main-menu-container .sub-action-btn.is-active svg { stroke: var(--sh-crimson-dark); }
+
+.main-menu-container .sub-action-btn.is-active svg {
+  stroke: var(--sh-crimson-dark);
+}
 
 /* نقطه‌ی قرمز اعلان */
 .main-menu-container .notif-dot {
@@ -939,6 +917,7 @@
   background: radial-gradient(circle at 50% 30%, #4a3322, #150b07);
   border: 1.5px solid var(--br-hi);
 }
+
 .main-menu-container .hub-status-row .shahnameh-icon-btn svg {
   width: 56%;
   height: 56%;
@@ -956,14 +935,17 @@
   border: 1.5px solid var(--br);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7), 0 3px 8px rgba(0, 0, 0, 0.45);
 }
+
 .main-menu-container .hub-status-row .coin-plus-btn {
   width: max(22px, calc(var(--u) * 30));
   height: max(22px, calc(var(--u) * 30));
   font-size: max(15px, calc(var(--u) * 24));
 }
+
 .main-menu-container .hub-status-row .coin-text {
   font-size: max(12px, calc(var(--u) * 24));
 }
+
 .main-menu-container .hub-status-row .coin-emblem svg {
   width: max(20px, calc(var(--u) * 32));
   height: max(20px, calc(var(--u) * 32));
@@ -1041,6 +1023,7 @@
   border-radius: 6px;
   direction: ltr;
 }
+
 .main-menu-container .khan-card-stars svg {
   width: max(13px, calc(var(--u) * 26));
   height: max(13px, calc(var(--u) * 26));
@@ -1072,15 +1055,27 @@
   cursor: pointer;
   touch-action: manipulation;
 }
-.main-menu-container .khan-arrow svg { width: 62%; height: 62%; }
-.main-menu-container .khan-arrow:active { transform: scale(0.88); }
-.main-menu-container .khan-arrow:disabled { opacity: 0.3; cursor: default; }
+
+.main-menu-container .khan-arrow svg {
+  width: 62%;
+  height: 62%;
+}
+
+.main-menu-container .khan-arrow:active {
+  transform: scale(0.88);
+}
+
+.main-menu-container .khan-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
 
 .main-menu-container .khan-dots {
   display: flex;
   align-items: center;
   gap: max(6px, calc(var(--u) * 14));
 }
+
 .main-menu-container .khan-dot {
   width: max(7px, calc(var(--u) * 14));
   height: max(7px, calc(var(--u) * 14));
@@ -1088,6 +1083,7 @@
   background: #3a2a1c;
   border: 1px solid #7a5a2c;
 }
+
 .main-menu-container .khan-dot.is-active {
   background: var(--sh-gold);
   border-color: var(--sh-gold-soft);
@@ -1104,14 +1100,26 @@
   padding: 4px max(10px, calc(var(--u) * 20));
   border-radius: max(8px, calc(var(--u) * 14));
 }
+
 .main-menu-container .battle-start-btn::before {
   border: 1px solid rgba(255, 215, 0, 0.55);
   border-radius: max(5px, calc(var(--u) * 10));
 }
-.main-menu-container .battle-btn-text { align-items: center; text-align: center; }
-.main-menu-container .battle-main-title { font-size: max(17px, calc(var(--u) * 44)); }
-.main-menu-container .battle-sub-title { display: none; }
-.main-menu-container .battle-start-btn > svg {
+
+.main-menu-container .battle-btn-text {
+  align-items: center;
+  text-align: center;
+}
+
+.main-menu-container .battle-main-title {
+  font-size: max(17px, calc(var(--u) * 44));
+}
+
+.main-menu-container .battle-sub-title {
+  display: none;
+}
+
+.main-menu-container .battle-start-btn>svg {
   width: max(24px, calc(var(--u) * 52));
   height: max(24px, calc(var(--u) * 52));
 }
@@ -1135,10 +1143,23 @@
   animation: sh-toast 1.6s ease both;
   pointer-events: none;
 }
+
 @keyframes sh-toast {
-  0%   { opacity: 0; transform: translate(-50%, 8px); }
-  12%, 85% { opacity: 1; transform: translate(-50%, 0); }
-  100% { opacity: 0; transform: translate(-50%, -6px); }
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+
+  12%,
+  85% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
 }
 
 /* =====================================================
@@ -1154,6 +1175,11 @@
     min-width: 200px;
   }
 
+  .player-profile .player-profile-img {
+    object-fit: cover;
+    width: 100%;
+  }
+
   /* .main-menu-container .game-title-block {
     position: absolute;
     top: calc(var(--u) * 0);
@@ -1161,26 +1187,32 @@
     transform: translateX(-50%);
 
   } */
-.game-title-block {
-  position: absolute;
-  top: -72%;
-  left: 10%;
-  transform: translate(-50%, -50%); /* انتقال دقیق به نقطه وسط صفحه */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  pointer-events: none; /* تا مانع کلیک روی موارد زیرین نشود */
-}
+  .game-title-block {
+    position: absolute;
+    top: -72%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    /* انتقال دقیق به نقطه وسط صفحه */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    pointer-events: none;
+    /* تا مانع کلیک روی موارد زیرین نشود */
+  }
 
-.game-title-block img {
-  max-width: 450px;
-  width: 25vw;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.9));
-}
-  .main-menu-container .game-title { font-size: max(25px, calc(var(--u) * 80)); }
+  .game-title-block img {
+    max-width: 450px;
+    width: 25vw;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.9));
+  }
+
+  .main-menu-container .game-title {
+    font-size: max(25px, calc(var(--u) * 80));
+  }
+
   .main-menu-container .game-subtitle {
     margin-top: calc(var(--u) * 4);
     padding: max(2px, calc(var(--u) * 5)) max(20px, calc(var(--u) * 44));
@@ -1202,6 +1234,7 @@
     flex-direction: column;
     gap: max(5px, calc(var(--u) * 14));
   }
+
   .main-menu-container .side-menu .nav-tile,
   .main-menu-container .side-menu .sub-action-btn {
     width: max(56px, calc(var(--u) * 88));
@@ -1241,6 +1274,7 @@
     direction: rtl;
     gap: max(5px, calc(var(--u) * 12));
   }
+
   .main-menu-container .hub-sub-actions .nav-tile,
   .main-menu-container .hub-sub-actions .sub-action-btn {
     width: max(70px, calc(var(--u) * 158));
@@ -1263,27 +1297,63 @@
     height: 100dvh;
     min-height: 0;
     padding:
-      calc(var(--sh-safe-t) + 10px)
-      calc(var(--sh-safe-r) + 10px)
-      calc(var(--sh-safe-b) + 10px)
-      calc(var(--sh-safe-l) + 10px);
+      calc(var(--sh-safe-t) + 10px) calc(var(--sh-safe-r) + 10px) calc(var(--sh-safe-b) + 10px) calc(var(--sh-safe-l) + 10px);
     overflow-x: hidden;
     overflow-y: auto;
   }
 
-  .main-menu-container .player-profile      { order: 1; flex: 0 0 auto; }
-  .main-menu-container .hub-status-row      { order: 2; flex: 0 0 auto; }
-  .main-menu-container .game-title-block    { order: 3; flex: 0 0 auto; }
-  .main-menu-container .side-menu           { order: 4; flex: 0 0 auto; }
-  .main-menu-container .khan-card           { order: 5; flex: 1 1 130px; min-height: 120px; max-height: 300px; margin-top: 14px; }
-  .main-menu-container .khan-pager          { order: 6; flex: 0 0 auto; height: 36px; }
-  .main-menu-container .battle-start-btn    { order: 7; flex: 0 0 auto; height: 58px; }
-  .main-menu-container .hub-sub-actions     { order: 8; flex: 0 0 auto; }
+  .main-menu-container .player-profile {
+    order: 1;
+    flex: 0 0 auto;
+  }
 
-  .main-menu-container .player-profile { width: 100%; }
-  .main-menu-container .player-info { 
+  .main-menu-container .hub-status-row {
+    order: 2;
+    flex: 0 0 auto;
+  }
+
+  .main-menu-container .game-title-block {
+    order: 3;
+    flex: 0 0 auto;
+  }
+
+  .main-menu-container .side-menu {
+    order: 4;
+    flex: 0 0 auto;
+  }
+
+  .main-menu-container .khan-card {
+    order: 5;
+    flex: 1 1 130px;
+    min-height: 120px;
+    max-height: 300px;
+    margin-top: 14px;
+  }
+
+  .main-menu-container .khan-pager {
+    order: 6;
+    flex: 0 0 auto;
+    height: 36px;
+  }
+
+  .main-menu-container .battle-start-btn {
+    order: 7;
+    flex: 0 0 auto;
+    height: 58px;
+  }
+
+  .main-menu-container .hub-sub-actions {
+    order: 8;
+    flex: 0 0 auto;
+  }
+
+  .main-menu-container .player-profile {
+    width: 100%;
+  }
+
+  .main-menu-container .player-info {
     height: 44px,
-    
+
   }
 
   .main-menu-container .hub-status-row .shahnameh-coin-box {
@@ -1292,12 +1362,16 @@
     min-width: 0;
     height: 38px;
   }
+
   .main-menu-container .hub-status-row .shahnameh-icon-btn {
     width: 38px;
     height: 38px;
   }
 
-  .main-menu-container .game-title { font-size: clamp(38px, 13vw, 60px); }
+  .main-menu-container .game-title {
+    font-size: clamp(38px, 13vw, 60px);
+  }
+
   .main-menu-container .game-subtitle {
     padding: 2px 30px;
     font-size: clamp(11px, 3.4vw, 14px);
@@ -1308,35 +1382,59 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 6px;
   }
+
   .main-menu-container .side-menu .nav-tile,
-  .main-menu-container .side-menu .sub-action-btn { height: 58px; }
+  .main-menu-container .side-menu .sub-action-btn {
+    height: 58px;
+  }
 
   .main-menu-container .hub-sub-actions {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 6px;
   }
+
   .main-menu-container .hub-sub-actions .nav-tile,
   .main-menu-container .hub-sub-actions .sub-action-btn {
     height: 60px;
     font-size: 10px;
   }
 
-  .main-menu-container .battle-main-title { font-size: 22px; }
-  .main-menu-container .khan-card-title   { top: -16px; font-size: 14px; }
-  .main-menu-container .khan-card-name    { font-size: 13px; top: 18px; }
+  .main-menu-container .battle-main-title {
+    font-size: 22px;
+  }
 
-  .main-menu-container .menu-toast { bottom: calc(var(--sh-safe-b) + 90px); }
+  .main-menu-container .khan-card-title {
+    top: -16px;
+    font-size: 14px;
+  }
+
+  .main-menu-container .khan-card-name {
+    font-size: 13px;
+    top: 18px;
+  }
+
+  .main-menu-container .menu-toast {
+    bottom: calc(var(--sh-safe-b) + 90px);
+  }
 }
 
 /* گوشی‌های خیلی کوتاه در حالت افقی */
 @media (orientation: landscape) and (max-height: 340px) {
+
   .main-menu-container .side-menu .nav-tile,
-  .main-menu-container .side-menu .sub-action-btn { height: 42px; }
-  .main-menu-container .menu-toast { bottom: calc(var(--sh-safe-b) + 16dvh); }
+  .main-menu-container .side-menu .sub-action-btn {
+    height: 42px;
+  }
+
+  .main-menu-container .menu-toast {
+    bottom: calc(var(--sh-safe-b) + 16dvh);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .main-menu-container .menu-toast { animation: none; }
+  .main-menu-container .menu-toast {
+    animation: none;
+  }
 }
 

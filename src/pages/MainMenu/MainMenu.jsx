@@ -68,20 +68,21 @@ export default function MainMenu() {
     >
       {/* پروفایل بازیکن (بالا چپ) */}
       <div className="player-profile">
-        <div className="player-avatar">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <path d="M8 64c2-16 12-22 24-22s22 6 24 22z" fill="#7a1018" />
-            <circle cx="32" cy="26" r="11" fill="#d9a066" />
-            <path d="M19 25c0-9 6-16 13-16s13 7 13 16l-4 1c0-6-3-10-9-10s-9 4-9 10z" fill="#c9962f" />
-            <rect x="30" y="8" width="4" height="9" rx="2" fill="#ffd700" />
-          </svg>
-        </div>
         <div className="player-info">
           <span className="player-name">رستم</span>
           <div className="player-level-row">
             <span className="player-level">Lv. {level}</span>
-            <div className="player-xp-bar">
-              <div className="player-xp-fill" style={{ width: `${xpPercent}%` }} />
+            <div
+              className="player-xp-bar"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(xpPercent)}
+            >
+              <div
+                className="player-xp-fill"
+                style={{ width: `${Math.min(100, Math.max(0, xpPercent))}%` }}
+              />
             </div>
           </div>
         </div>
@@ -89,7 +90,7 @@ export default function MainMenu() {
 
       {/* عنوان بازی */}
       <div className="game-title-block">
-       <img src={TitelNeme} alt="notFund" />
+        <img src={TitelNeme} alt="notFund" />
       </div>
       {/* ستون سمت چپ */}
       <div className="side-menu">
