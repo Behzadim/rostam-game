@@ -1,85 +1,156 @@
-import { useState } from 'react';
+// رخت‌خانه و سلیح پهلوانی (متصل به حافظه بومی موبایل در gameStore)
+import { useEffect, useRef, useState } from 'react';
 import { useGameStore } from '../../game/gameStore/gameStore';
-export default function EquipmentModal() {
-    const coins = useGameStore((state) => state.coins ?? 0);
-    const stats = useGameStore((state) => state.stats);
-    const upgradeEquipment = useGameStore((state) => state.upgradeEquipment);
-    const setActiveModal = useGameStore((state) => state.setActiveModal);
+import '../../styles/EquipmentModal.css';
 
-    const [feedback, setFeedback] = useState(null);
+// =========================================================================
+// محل وارد کردن عکس‌ها (وقتی عکس‌ها را در پوشه assets/images گذاشتید از کامنت خارج کنید):
+// =========================================================================
+import maceImgFile from '../../assets/images/mace.png';
+import armorImgFile from '../../assets/images/armor.png';
+import zar from '../../assets/images/zar.png'
+const MACE_IMAGE = maceImgFile;  // بعد از ایمپورت تغییر دهید به: maceImgFile
+const ARMOR_IMAGE = armorImgFile; // بعد از ایمپورت تغییر دهید به: armorImgFile
 
-    const maceLevel = stats?.maceLevel || 1;
-    const armorLevel = stats?.armorLevel || 1;
-    const maceCost = maceLevel * 300;
-    const armorCost = armorLevel * 350;
+const EMPTY_STATS = {};
 
-    const handleUpgrade = (type) => {
-        const result = upgradeEquipment(type);
-        setFeedback(result);
-        setTimeout(() => setFeedback(null), 2500);
+export default function EquipmentModal({ onClose }) {
+  const coins = useGameStore((state) => state.coins ?? 0);
+  const rawStats = useGameStore((state) => state.stats);
+  const upgradeEquipment = useGameStore((state) => state.upgradeEquipment);
+  const setActiveModal = useGameStore((state) => state.setActiveModal);
+
+  const stats = rawStats || EMPTY_STATS;
+  const [feedback, setFeedback] = useState(null);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
     };
+  }, []);
 
-    return (
-        <div className="rpg-modal-overlay" onClick={() => setActiveModal(null)}>
-            <div className="rpg-modal-box" onClick={(e) => e.stopPropagation()}>
+  const handleClose = () => {
+    if (typeof onClose === 'function') {
+      onClose();
+    } else {
+      setActiveModal(null);
+    }
+  };
 
-                <div className="rpg-modal-header">
-                    <h4 className="m-0 fw-bold text-warning">رخت‌خانه و سلیح پهلوانی</h4>
-                    <button className="rpg-close-btn" onClick={() => setActiveModal(null)}>✕</button>
-                </div>
+  const maceLevel = Math.max(1, Number(stats.maceLevel) || 1);
+  const armorLevel = Math.max(1, Number(stats.armorLevel) || 1);
+  const attackPower = Number(stats.attackPower) || 35;
+  const maxHealth = Number(stats.maxHealth) || 150;
 
-                {feedback && (
-                    <div className={`rpg-alert ${feedback.success ? 'alert-success-rpg' : 'alert-error-rpg'}`}>
-                        {feedback.message}
-                    </div>
-                )}
+  const maceCost = maceLevel * 300;
+  const armorCost = armorLevel * 350;
 
-                <div className="rpg-modal-body">
+  const handleUpgrade = (type) => {
+    const result = upgradeEquipment(type);
+    setFeedback(result);
 
-                    {/* کارت ارتقای گرز گاوسر */}
-                    <div className="shop-item-card">
-                        <div className="shop-item-icon">🔨{/* اینجا باید یک  عکس گرز جذاب قراربگیرد */}</div>
-                        <div className="shop-item-info">
-                            <div className="d-flex align-items-center gap-2">
-                                <span className="shop-item-title">گرز گاوسر</span>
-                                <span className="shop-item-owned">سطح {maceLevel}</span>
-                            </div>
-                            <p className="shop-item-desc m-0">
-                                قدرت ضربه فعلی: <strong className="text-warning">{stats?.attackPower}</strong> (+۱۸ در سطح بعد)
-                            </p>
-                        </div>
-                        <button
-                            className={`rpg-buy-btn ${coins < maceCost ? 'disabled' : ''}`}
-                            onClick={() => handleUpgrade('mace')}
-                        >
-                            <span>{maceCost}</span>
-                            <small>ارتقا</small>
-                        </button>
-                    </div>
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setFeedback(null), 2500);
+  };
 
-                    {/* کارت ارتقای زره ببر بیان */}
-                    <div className="shop-item-card">
-                        <div className="shop-item-icon">🛡️</div>
-                        <div className="shop-item-info">
-                            <div className="d-flex align-items-center gap-2">
-                                <span className="shop-item-title"> لباس رزم  </span>
-                                <span className="shop-item-owned">سطح {armorLevel}</span>
-                            </div>
-                            <p className="shop-item-desc m-0">
-                                حداکثر جان: <strong className="text-warning">{stats?.maxHealth}</strong> (+۴۰ در سطح بعد)
-                            </p>
-                        </div>
-                        <button
-                            className={`rpg-buy-btn ${coins < armorCost ? 'disabled' : ''}`}
-                            onClick={() => handleUpgrade('armor')}
-                        >
-                            <span>{armorCost}</span>
-                            <small>ارتقا</small>
-                        </button>
-                    </div>
+  return (
+    <div className="equip-overlay" onClick={handleClose}>
+      <div className="equip-modal" onClick={(e) => e.stopPropagation()}>
 
-                </div>
+        {/* هدر پنجره + موجودی سکه */}
+        <div className="equip-header">
+          <h4 className="equip-title">⚔️ سلاح پهلوانی</h4>
+          <div className="equip-header-left">
+            <div className="equip-coin-badge">
+              <span><img style={{ width: "30px" }} src={zar} alt="زر" /></span>
+              <span>{coins.toLocaleString()}</span>
             </div>
+            <button
+              type="button"
+              className="equip-close-btn"
+              onClick={handleClose}
+              aria-label="بستن"
+            >
+              ✕
+            </button>
+          </div>
         </div>
-    );
+
+        {/* پیام نتیجه ارتقا یا کمبود سکه */}
+        {feedback && (
+          <div className={`equip-alert ${feedback.success ? 'is-success' : 'is-error'}`}>
+            {feedback.message}
+          </div>
+        )}
+
+        {/* کارت‌های ارتقای سلاح و زره */}
+        <div className="equip-body">
+
+          {/* کارت ارتقای گرز گاوسر */}
+          <div className="equip-card">
+            <div className="equip-item-media">
+              {MACE_IMAGE ? (
+                <img src={MACE_IMAGE} alt="گرز گاوسر" className="equip-item-img" />
+              ) : (
+                <span className="equip-item-emoji">🔨</span>
+              )}
+            </div>
+
+            <div className="equip-card-info">
+              <div className="equip-card-top">
+                <span className="equip-card-title">گرز گاوسر</span>
+                <span className="equip-lv-badge">سطح {maceLevel}</span>
+              </div>
+              <p className="equip-card-desc">
+                قدرت ضربه فعلی: <strong>{attackPower}</strong>
+                <span className="equip-next-bonus"> (+۱۸ در سطح بعد)</span>
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className={`equip-buy-btn ${coins < maceCost ? 'is-locked' : ''}`}
+              onClick={() => handleUpgrade('mace')}
+            >
+              <span>{maceCost.toLocaleString()}</span>
+              <small>ارتقا <img style={{width : "30px"}} src={zar} alt="زر"  /></small>
+            </button>
+          </div>
+
+          {/* کارت ارتقای زره ببر بیان */}
+          <div className="equip-card">
+            <div className="equip-item-media">
+              {ARMOR_IMAGE ? (
+                <img src={ARMOR_IMAGE} alt="لباس رزم" className="equip-item-img" />
+              ) : (
+                <span className="equip-item-emoji">🛡️</span>
+              )}
+            </div>
+
+            <div className="equip-card-info">
+              <div className="equip-card-top">
+                <span className="equip-card-title">لباس رزم</span>
+                <span className="equip-lv-badge">سطح {armorLevel}</span>
+              </div>
+              <p className="equip-card-desc">
+                حداکثر جان: <strong>{maxHealth}</strong>
+                <span className="equip-next-bonus"> (+۴۰ در سطح بعد)</span>
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className={`equip-buy-btn ${coins < armorCost ? 'is-locked' : ''}`}
+              onClick={() => handleUpgrade('armor')}
+            >
+              <span>{armorCost.toLocaleString()}</span>
+              <small>ارتقا <img style={{width : "30px"}} src={zar} alt="زر"  /></small>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
 }

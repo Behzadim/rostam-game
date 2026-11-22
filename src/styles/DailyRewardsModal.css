@@ -1,0 +1,545 @@
+/* =========================================================================
+   استایل اختصاصی پنجره ۲۰ جایزه روزانه (DailyRewardsModal.css)
+   هماهنگ با تم برنزی-طلایی EquipmentModal | ریسپانسیو افقی و عمودی موبایل
+   ========================================================================= */
+
+.daily-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: rgba(6, 8, 14, 0.8);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    direction: rtl;
+    padding:
+        max(10px, env(safe-area-inset-top))
+        max(10px, env(safe-area-inset-right))
+        max(10px, env(safe-area-inset-bottom))
+        max(10px, env(safe-area-inset-left));
+    box-sizing: border-box;
+    overscroll-behavior: contain;
+}
+
+.daily-modal {
+    width: 100%;
+    max-width: 760px;
+    max-height: 92dvh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(165deg, #241913 0%, #151110 55%, #0f0d0e 100%);
+    border: 2px solid rgba(235, 179, 68, 0.65);
+    border-radius: 20px;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.75),
+        inset 0 1px 0 rgba(255, 224, 138, 0.25);
+    overflow: hidden;
+    color: #f8ecd1;
+    box-sizing: border-box;
+    animation: dailyModalPop 0.16s ease-out;
+}
+
+@keyframes dailyModalPop {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ---------- هدر سرتاسری ---------- */
+.daily-header {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(90deg, rgba(168, 92, 22, 0.28), rgba(40, 24, 14, 0.85));
+    border-bottom: 1px solid rgba(235, 179, 68, 0.35);
+    box-sizing: border-box;
+}
+
+.daily-header-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+}
+
+.daily-title {
+    margin: 0;
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: #ffd66b;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.daily-counter {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #ffe07d;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 209, 92, 0.55);
+    border-radius: 999px;
+    padding: 3px 11px;
+    white-space: nowrap;
+}
+
+.daily-close-btn {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+    border-radius: 10px;
+    background: rgba(153, 27, 27, 0.45);
+    border: 1px solid rgba(255, 140, 120, 0.55);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s ease, background 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.daily-close-btn:hover {
+    background: rgba(220, 38, 38, 0.75);
+    transform: scale(1.05);
+}
+
+.daily-close-btn:active {
+    transform: scale(0.94);
+}
+
+/* ---------- نوار پیشرفت ---------- */
+.daily-progress-track {
+    flex: 0 0 auto;
+    width: auto;
+    height: 8px;
+    margin: 10px 16px 0;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(235, 179, 68, 0.35);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.daily-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #c77b12, #f5b935, #ffe08a);
+    box-shadow: 0 0 10px rgba(245, 185, 53, 0.5);
+    transition: width 0.3s ease;
+}
+
+/* ---------- پیام موفقیت ---------- */
+.daily-alert {
+    flex: 0 0 auto;
+    margin: 8px 16px 0;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-align: center;
+    background: rgba(22, 163, 74, 0.2);
+    border: 1px solid rgba(74, 222, 128, 0.6);
+    color: #bbf7d0;
+}
+
+/* ---------- گرید ۲۰ جایزه (۵ ستون × ۴ ردیف) ---------- */
+.daily-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-content: start;
+    gap: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(235, 179, 68, 0.65) rgba(0, 0, 0, 0.3);
+}
+
+.daily-card {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 22px 6px 8px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(48, 33, 24, 0.9), rgba(26, 20, 18, 0.95));
+    border: 1px solid rgba(235, 179, 68, 0.3);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.32);
+    text-align: center;
+    box-sizing: border-box;
+    transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* روزهای ویژه (۵، ۱۰، ۱۵، ۲۰) */
+.daily-card.is-special {
+    background: linear-gradient(135deg, rgba(88, 42, 24, 0.92), rgba(34, 18, 14, 0.96));
+    border-color: rgba(245, 191, 78, 0.6);
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.4),
+        inset 0 0 12px rgba(255, 185, 50, 0.14);
+}
+
+/* روزهایی که قبلاً دریافت شده‌اند */
+.daily-card.is-claimed {
+    opacity: 0.56;
+    background: linear-gradient(135deg, rgba(24, 46, 32, 0.88), rgba(16, 22, 18, 0.95));
+    border-color: rgba(74, 222, 128, 0.45);
+    box-shadow: none;
+}
+
+/* روز جاری که الان قابل دریافت است */
+.daily-card.is-available {
+    opacity: 1;
+    cursor: pointer;
+    background: linear-gradient(155deg, rgba(110, 72, 24, 0.95), rgba(38, 25, 14, 0.98));
+    border: 2px solid #ffd66b;
+    box-shadow:
+        0 0 14px rgba(245, 185, 53, 0.42),
+        inset 0 0 12px rgba(255, 214, 107, 0.2);
+}
+
+.daily-card.is-available:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 18px rgba(245, 185, 53, 0.55),
+        inset 0 0 14px rgba(255, 214, 107, 0.25);
+}
+
+.daily-card.is-available:active {
+    transform: scale(0.96);
+}
+
+/* روز بعدی (فردا) */
+.daily-card.is-tomorrow {
+    border-style: dashed;
+    border-color: rgba(255, 209, 92, 0.6);
+}
+
+.daily-card-day {
+    flex: 0 0 auto;
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: #d6c7ae;
+    line-height: 1.15;
+    white-space: nowrap;
+}
+
+.daily-card.is-available .daily-card-day {
+    color: #ffe08a;
+}
+
+.daily-card-icon {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.55rem;
+    line-height: 1;
+}
+
+.daily-card-icon img,
+.daily-reward-img {
+    width: 34px !important;
+    height: 34px !important;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+    pointer-events: none;
+}
+
+/* کادر مقدار جایزه — همیشه کامل و خوانا در همه سایزها */
+.daily-card-label {
+    flex: 0 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px 5px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(235, 179, 68, 0.2);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #fff3d1;
+    line-height: 1.3;
+    text-align: center;
+    white-space: normal;
+    overflow: visible;
+    word-break: keep-all;
+}
+
+.daily-card.is-available .daily-card-label {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 214, 107, 0.45);
+    color: #ffe89e;
+}
+
+/* نشانگرهای گوشه کارت */
+.daily-badge {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    font-size: 0.62rem;
+    font-weight: 900;
+    padding: 1px 6px;
+    border-radius: 6px;
+    line-height: 1.25;
+    pointer-events: none;
+}
+
+.daily-badge.claimed {
+    background: rgba(22, 163, 74, 0.85);
+    color: #ecfdf5;
+    border: 1px solid rgba(134, 239, 172, 0.7);
+}
+
+.daily-badge.ready {
+    background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+    color: #fff;
+    border: 1px solid #ffe08a;
+}
+
+.daily-badge.tomorrow {
+    background: rgba(0, 0, 0, 0.65);
+    color: #ffd66b;
+    border: 1px solid rgba(255, 209, 92, 0.5);
+}
+
+/* ---------- فوتر سرتاسری و دکمه دریافت ---------- */
+.daily-footer {
+    flex: 0 0 auto;
+    padding: 10px 16px;
+    background: rgba(16, 12, 10, 0.75);
+    border-top: 1px solid rgba(235, 179, 68, 0.32);
+    box-sizing: border-box;
+}
+
+.daily-claim-btn {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: 13px;
+    background: linear-gradient(180deg, #f5b935 0%, #c77b12 100%);
+    border: 1px solid #ffe08a;
+    color: #1c1002;
+    font-size: 0.92rem;
+    font-weight: 900;
+    line-height: 1.3;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(199, 123, 18, 0.35);
+    transition: transform 0.15s ease, filter 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.daily-claim-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.daily-claim-preview img,
+.daily-claim-preview .daily-reward-img {
+    width: 20px !important;
+    height: 20px !important;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+}
+
+.daily-claim-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+}
+
+.daily-claim-btn:active {
+    transform: scale(0.98);
+}
+
+.daily-status-wait,
+.daily-status-done {
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 9px 12px;
+    border-radius: 12px;
+}
+
+.daily-status-wait {
+    background: rgba(48, 33, 24, 0.55);
+    border: 1px solid rgba(235, 179, 68, 0.35);
+    color: #e6d1a5;
+}
+
+.daily-status-done {
+    background: rgba(22, 163, 74, 0.2);
+    border: 1px solid rgba(74, 222, 128, 0.6);
+    color: #bbf7d0;
+}
+
+/* =========================================================================
+   ریسپانسیو عرض‌های کوچک (موبایل عمودی و پنجره‌های باریک)
+   ========================================================================= */
+@media (max-width: 680px) {
+    .daily-modal {
+        max-height: 90dvh;
+    }
+
+    .daily-header {
+        padding: 10px 12px;
+    }
+
+    .daily-title {
+        font-size: 0.96rem;
+    }
+
+    .daily-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .daily-card {
+        padding: 20px 5px 7px;
+        gap: 5px;
+        border-radius: 12px;
+    }
+
+    .daily-card-icon {
+        height: 32px;
+        font-size: 1.4rem;
+    }
+
+    .daily-card-icon img,
+    .daily-reward-img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .daily-card-label {
+        font-size: 0.72rem;
+        padding: 3px 4px;
+    }
+
+    .daily-footer {
+        padding: 9px 12px;
+    }
+
+    .daily-claim-btn {
+        font-size: 0.85rem;
+        padding: 9px 10px;
+    }
+}
+
+/* موبایل‌های خیلی باریک */
+@media (max-width: 360px) {
+    .daily-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================================================
+   ریسپانسیو حالت افقی موبایل‌های کوتاه (Landscape Mobile)
+   ========================================================================= */
+@media (orientation: landscape) and (max-height: 500px) {
+    .daily-modal {
+        max-height: 94dvh;
+        border-radius: 16px;
+    }
+
+    .daily-header {
+        padding: 8px 14px;
+    }
+
+    .daily-title {
+        font-size: 0.94rem;
+    }
+
+    .daily-progress-track {
+        margin: 6px 12px 0;
+        height: 6px;
+    }
+
+    .daily-alert {
+        margin: 6px 12px 0;
+        padding: 5px 10px;
+        font-size: 0.76rem;
+    }
+
+    .daily-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        padding: 8px 12px;
+        gap: 7px;
+    }
+
+    .daily-card {
+        padding: 18px 4px 6px;
+        gap: 4px;
+        border-radius: 11px;
+    }
+
+    .daily-card-day {
+        font-size: 0.68rem;
+    }
+
+    .daily-card-icon {
+        height: 28px;
+        font-size: 1.25rem;
+    }
+
+    .daily-card-icon img,
+    .daily-reward-img {
+        width: 26px !important;
+        height: 26px !important;
+    }
+
+    .daily-card-label {
+        font-size: 0.68rem;
+        padding: 2px 3px;
+    }
+
+    .daily-footer {
+        padding: 7px 12px;
+    }
+
+    .daily-claim-btn {
+        padding: 7px 10px;
+        font-size: 0.82rem;
+        border-radius: 10px;
+    }
+
+    .daily-claim-preview img,
+    .daily-claim-preview .daily-reward-img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 560px) {
+    .daily-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

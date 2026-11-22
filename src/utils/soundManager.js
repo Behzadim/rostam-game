@@ -1,45 +1,169 @@
 import lobbyMusicFile from "../assets/audio/lobby-music.mp3";
+import { useGameStore } from "../game/gameStore/gameStore";
 
-let soundInstance = null;
-let isMuted = false; // نگهداری وضعیت فعلی صدا (قطع یا وصل)
+// نگهداری وضعیت سراسری روی window تا حتی با HMR در Vite دو نمونه ساخته نشود
+const STATE_KEY = "__ROSTAM_HOWLER_BGM__";
+
+function getAudioState() {
+  if (typeof window === "undefined") {
+    return {
+      soundInstance: null,
+      initPromise: null,
+      isStarting: false,
+      pausedByVisibility: false,
+      visibilityBound: false,
+    };
+  }
+
+  if (!window[STATE_KEY]) {
+    window[STATE_KEY] = {
+      soundInstance: null,
+      initPromise: null,
+      isStarting: false,
+      pausedByVisibility: false,
+      visibilityBound: false,
+    };
+  }
+
+  return window[STATE_KEY];
+}
+
+function getStoreMuted() {
+  return Boolean(useGameStore.getState().settings?.isMuted);
+}
+
+function bindVisibilityHandler() {
+  if (typeof document === "undefined") return;
+  const state = getAudioState();
+  if (state.visibilityBound) return;
+
+  state.visibilityBound = true;
+  document.addEventListener("visibilitychange", () => {
+    const s = getAudioState();
+    const sound = s.soundInstance;
+    if (!sound) return;
+
+    if (document.hidden) {
+      if (sound.playing()) {
+        sound.pause();
+        s.pausedByVisibility = true;
+      }
+      s.isStarting = false;
+    } else if (s.pausedByVisibility) {
+      s.pausedByVisibility = false;
+      const stage = useGameStore.getState().gameStage;
+      if (!getStoreMuted() && stage !== "PLAYING" && !sound.playing()) {
+        sound.play();
+      }
+    }
+  });
+}
 
 export const initAndPlayMusic = async () => {
-  // اگر صدا قبلاً پخش می‌شود، کاری نکن
-  if (soundInstance && soundInstance.playing()) return;
+  const state = getAudioState();
+  bindVisibilityHandler();
 
-  // اگر نمونه Howl هنوز ساخته نشده، لایبرری را لود کرده و نمونه را ایجاد می‌کنیم
-  if (!soundInstance) {
-    const { Howl } = await import("howler");
+  const muted = getStoreMuted();
+  const stage = useGameStore.getState().gameStage;
 
-    soundInstance = new Howl({
-      src: [lobbyMusicFile],
-      loop: true,
-      volume: 0.5,
-      mute: isMuted, // اعمال وضعیت میوت هنگام ساخت نمونه
-      html5: true, // استفاده از حالت HTML5 برای سازگاری کامل با موبایل
-      onloaderror: (id, err) => {
-        console.warn("خطا در بارگذاری صوت:", err);
-      },
-    });
+  // اگر صدا قطع است، داخل نبرد هستیم، یا صدا همین الان در حال پخش/شروع است، کاری نکن
+  if (muted || stage === "PLAYING") return;
+  if (state.isStarting || (state.soundInstance && state.soundInstance.playing())) {
+    return;
   }
 
-  // پخش صدا پس از تعامل کاربر
-  soundInstance.play();
+  state.isStarting = true;
+
+  try {
+    // جلوگیری از ساخت همزمان دو نمونه Howl هنگام لود شدن کتابخانه
+    if (!state.soundInstance) {
+      if (!state.initPromise) {
+        state.initPromise = import("howler").then(({ Howl }) => {
+          const musicVolume = useGameStore.getState().settings?.musicVolume ?? 0.5;
+          const instance = new Howl({
+            src: [lobbyMusicFile],
+            loop: true,
+            volume: musicVolume,
+            mute: getStoreMuted(),
+            html5: true, // سازگاری کامل با موبایل
+            onplay: () => {
+              state.isStarting = false;
+            },
+            onstop: () => {
+              state.isStarting = false;
+            },
+            onplayerror: () => {
+              state.isStarting = false;
+              // جلوگیری از صف شدن پخش تکراری در Howler پس از خطای Autoplay
+              instance.stop();
+            },
+            onloaderror: (id, err) => {
+              state.isStarting = false;
+              console.warn("خطا در بارگذاری صوت:", err);
+            },
+          });
+
+          state.soundInstance = instance;
+          return instance;
+        });
+      }
+
+      await state.initPromise;
+    }
+
+    const sound = state.soundInstance;
+    const latestStage = useGameStore.getState().gameStage;
+
+    // بررسی مجدد پس از await (مثلاً اگر کاربر در همین فاصله وارد نبرد شده یا صدا را قطع کرده)
+    if (!sound || !state.isStarting || getStoreMuted() || latestStage === "PLAYING") {
+      state.isStarting = false;
+      return;
+    }
+
+    if (sound.playing()) {
+      state.isStarting = false;
+      return;
+    }
+
+    sound.mute(false);
+    sound.stop(); // تضمین قطعی که هیچ صدای قبلی داخل همین نمونه باقی نمانده باشد
+    sound.play();
+  } catch (err) {
+    state.isStarting = false;
+    state.initPromise = null;
+    console.warn("خطا در راه‌اندازی موسیقی:", err);
+  }
 };
 
-// تابع جدید برای قطع و وصل کردن صدا
+// قطع و وصل کردن صدا + ذخیره دائمی در حافظه موبایل
 export const toggleMuteMusic = () => {
-  isMuted = !isMuted; // تغییر وضعیت
+  const state = getAudioState();
+  const nextMuted = !getStoreMuted();
 
-  if (soundInstance) {
-    soundInstance.mute(isMuted); // اعمال وضعیت جدید روی Howler
+  useGameStore.getState().setMuted(nextMuted);
+
+  if (state.soundInstance) {
+    state.soundInstance.mute(nextMuted);
+    if (nextMuted) {
+      state.soundInstance.pause();
+      state.isStarting = false;
+    }
   }
 
-  return isMuted; // برگرداندن وضعیت برای استفاده در دکمه UI
+  // اگر کاربر صدا را وصل کرد و در منو بود، آهنگ را پخش کن
+  if (!nextMuted && useGameStore.getState().gameStage !== "PLAYING") {
+    initAndPlayMusic();
+  }
+
+  return nextMuted;
 };
 
 export const stopMusic = () => {
-  if (soundInstance && soundInstance.playing()) {
-    soundInstance.stop();
+  const state = getAudioState();
+  state.isStarting = false;
+  state.pausedByVisibility = false;
+
+  if (state.soundInstance) {
+    state.soundInstance.stop();
   }
 };

@@ -1,0 +1,299 @@
+/* پنجره اختصاصی رخت‌خانه و سلیح پهلوانی */
+.equip-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(6, 8, 14, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  direction: rtl;
+}
+
+.equip-modal {
+  width: 100%;
+  max-width: 620px;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(165deg, #241913 0%, #151110 55%, #0f0d0e 100%);
+  border: 2px solid rgba(235, 179, 68, 0.65);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 224, 138, 0.25);
+  overflow: hidden;
+  color: #f8ecd1;
+}
+
+/* هدر */
+.equip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 18px;
+  background: linear-gradient(90deg, rgba(168, 92, 22, 0.28), rgba(40, 24, 14, 0.85));
+  border-bottom: 1px solid rgba(235, 179, 68, 0.35);
+}
+
+.equip-title {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #ffd66b;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.equip-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.equip-coin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 209, 92, 0.55);
+  color: #ffe07d;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.equip-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 140, 120, 0.55);
+  background: rgba(153, 27, 27, 0.45);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.equip-close-btn:hover {
+  background: rgba(220, 38, 38, 0.75);
+  transform: scale(1.05);
+}
+
+/* پیام بازخورد */
+.equip-alert {
+  margin: 12px 16px 0;
+  padding: 9px 14px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.equip-alert.is-success {
+  background: rgba(22, 163, 74, 0.2);
+  border: 1px solid rgba(74, 222, 128, 0.6);
+  color: #bbf7d0;
+}
+
+.equip-alert.is-error {
+  background: rgba(220, 38, 38, 0.22);
+  border: 1px solid rgba(248, 113, 113, 0.6);
+  color: #fecaca;
+}
+
+/* بدنه و کارت‌ها */
+.equip-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.equip-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(48, 33, 24, 0.92), rgba(26, 20, 18, 0.95));
+  border: 1px solid rgba(235, 179, 68, 0.32);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.equip-card:hover {
+  border-color: rgba(255, 208, 92, 0.7);
+  transform: translateY(-2px);
+}
+
+/* قاب عکس بزرگ‌تر و جذاب برای گرز و زره */
+.equip-item-media {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: radial-gradient(circle at center, rgba(255, 196, 70, 0.24) 0%, rgba(16, 12, 10, 0.95) 75%);
+  border: 2px solid rgba(245, 191, 78, 0.55);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.5),
+    inset 0 0 14px rgba(255, 185, 50, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6px;
+}
+
+.equip-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.65));
+  transition: transform 0.2s ease;
+}
+
+.equip-card:hover .equip-item-img {
+  transform: scale(1.06);
+}
+
+.equip-item-emoji {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+/* مشخصات آیتم */
+.equip-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.equip-card-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.equip-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff3d1;
+}
+
+.equip-lv-badge {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  color: #fcd34d;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.equip-card-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #d6c7ae;
+  line-height: 1.5;
+}
+
+.equip-card-desc strong {
+  color: #ffd66b;
+  font-size: 0.95rem;
+}
+
+.equip-next-bonus {
+  color: #86efac;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+/* دکمه ارتقا */
+.equip-buy-btn {
+  min-width: 102px;
+  padding: 10px 14px;
+  border-radius: 13px;
+  border: 1px solid #ffe08a;
+  background: linear-gradient(180deg, #f5b935 0%, #c77b12 100%);
+  color: #1c1002;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.25;
+  box-shadow: 0 6px 14px rgba(199, 123, 18, 0.35);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.equip-buy-btn span {
+  font-size: 1rem;
+}
+
+.equip-buy-btn small {
+  font-size: 0.76rem;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.equip-buy-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.equip-buy-btn:active {
+  transform: scale(0.97);
+}
+
+.equip-buy-btn.is-locked {
+  background: linear-gradient(180deg, #4b4642 0%, #2d2927 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #bfb5aa;
+  box-shadow: none;
+}
+
+/* ریسپانسیو موبایل */
+@media (max-width: 520px) {
+  .equip-header {
+    padding: 12px 14px;
+  }
+
+  .equip-title {
+    font-size: 0.98rem;
+  }
+
+  .equip-card {
+    gap: 10px;
+    padding: 11px;
+  }
+
+  .equip-item-media {
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+  }
+
+  .equip-buy-btn {
+    min-width: 86px;
+    padding: 8px 10px;
+  }
+
+  .equip-card-title {
+    font-size: 0.95rem;
+  }
+
+  .equip-card-desc {
+    font-size: 0.8rem;
+  }
+}

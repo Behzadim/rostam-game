@@ -7,19 +7,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 
 export default function App() {
+  const hasHydrated = useGameStore((state) => state._hasHydrated);
   const gameStage = useGameStore((state) => state.gameStage);
+  const isMuted = useGameStore((state) => state.settings?.isMuted ?? false);
+
+  // تا زمانی که سیو از حافظه موبایل کامل لود نشده، روی صفحه لودینگ بمان
+  const effectiveStage = !hasHydrated ? 'LOADING' : gameStage;
 
   const handleStartAudio = () => {
-    if (gameStage !== 'PLAYING') {
+    if (hasHydrated && !isMuted && effectiveStage !== 'PLAYING') {
       initAndPlayMusic();
     }
   };
-
   return (
-    <div onClick={handleStartAudio} onTouchStart={handleStartAudio}>
-      {gameStage === 'LOADING' && <LoadingScreen />}
-      {gameStage === 'MENU' && <MainMenu />}
-      {gameStage === 'PLAYING' && <PhaserGame />}
+    <div onPointerDown={handleStartAudio}>
+      {effectiveStage === 'LOADING' && <LoadingScreen />}
+      {effectiveStage === 'MENU' && <MainMenu />}
+      {effectiveStage === 'PLAYING' && <PhaserGame />}
     </div>
   );
 }

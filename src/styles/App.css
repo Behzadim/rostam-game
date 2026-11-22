@@ -1,742 +1,91 @@
-/* ۱. استایل صفحه لودینگ */
-.loading-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 3rem 2rem;
-  box-sizing: border-box;
-  z-index: 9999;
-}
-
-.loading-content {
-  width: 100%;
-  max-width: 500px;
-}
-
-/* ۲. استایل صفحه اصلی (کاملاً ثابت و بدون هیچ افکت انیمیشنی) */
-.main-menu-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-  z-index: 9999;
-}
-
-/* ۳. استایل سلطنتی و گیمینگ برای دکمه صدا در گوشه صفحه */
-.sound-toggle-btn {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  /* گوشه‌های گرد به سبک بازی‌های موبایلی */
-  background: radial-gradient(circle,
-      rgba(45, 32, 18, 0.9) 0%,
-      rgba(18, 12, 6, 0.95) 100%);
-  border: 2px solid #d4af37;
-  /* قاب طلایی */
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.7),
-    inset 0 0 8px rgba(212, 175, 55, 0.3);
-  color: #ffd700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 10000;
-  padding: 0;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-/* افکت درخشش هنگام قرار گرفتن موس یا لمس */
-.sound-toggle-btn:hover {
-  border-color: #fff3b0;
-  box-shadow:
-    0 6px 16px rgba(0, 0, 0, 0.8),
-    0 0 12px rgba(255, 215, 0, 0.5);
-  transform: translateY(-2px);
-}
-
-/* افکت فشرده شدن دکمه */
-.sound-toggle-btn:active {
-  transform: scale(0.92);
-}
-
-/* تغییر رنگ دکمه در حالت قطع بودن صدا (قرمز/خاکستری تیره) */
-.sound-toggle-btn.muted {
-  border-color: #8c3b3b;
-  color: #e06c75;
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.7),
-    inset 0 0 8px rgba(224, 108, 117, 0.2);
-}
-
-/* ==================== استایل پنجره‌های مودال (فروشگاه و تجهیزات) ==================== */
-.rpg-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(4px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 20000;
-  padding: 16px;
-  direction: rtl;
-}
-
-.rpg-modal-box {
-  width: 100%;
-  max-width: 520px;
-  background: linear-gradient(180deg, #24180d 0%, #120b05 100%);
-  border: 2px solid #d4af37;
-  border-radius: 20px;
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.9),
-    inset 0 0 15px rgba(212, 175, 55, 0.2);
-  padding: 20px;
-  color: #f5e6c8;
-  animation: modalPop 0.2s ease-out;
-}
-
-@keyframes modalPop {
-  from {
-    transform: scale(0.92);
-    opacity: 0;
-  }
-
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.rpg-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-}
-
-.rpg-close-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  color: #ffd700;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.rpg-alert {
-  padding: 8px 14px;
-  border-radius: 10px;
-  margin-bottom: 14px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.alert-success-rpg {
-  background: rgba(40, 167, 69, 0.25);
-  border: 1px solid #2ecc71;
-  color: #a3ffb8;
-}
-
-.alert-error-rpg {
-  background: rgba(220, 53, 69, 0.25);
-  border: 1px solid #e74c3c;
-  color: #ffb3b3;
-}
-
-.rpg-modal-body {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.shop-item-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  border-radius: 14px;
-  padding: 12px;
-}
-
-.shop-item-icon {
-  font-size: 2rem;
-  background: rgba(0, 0, 0, 0.4);
-  width: 54px;
-  height: 54px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
-.shop-item-info {
-  flex: 1;
-}
-
-.shop-item-title {
-  font-weight: 800;
-  color: #fff3b0;
-  font-size: 1rem;
-}
-
-.shop-item-owned {
-  background: rgba(212, 175, 55, 0.2);
-  color: #ffd700;
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 20px;
-}
-
-.shop-item-desc {
-  font-size: 0.8rem;
-  color: #bba882;
-  margin-top: 4px;
-}
-
-.rpg-buy-btn {
-  background: linear-gradient(180deg, #ffd700 0%, #c59b27 100%);
-  border: 1px solid #fff3b0;
-  color: #2b1700;
-  font-weight: 900;
-  border-radius: 12px;
-  padding: 8px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 1.1;
-  cursor: pointer;
-  min-width: 75px;
-}
-
-.rpg-buy-btn.disabled {
-  background: #3a3228;
-  border-color: #55483a;
-  color: #887865;
-  cursor: not-allowed;
-}
-
-/* ۱. استایل صفحه لودینگ */
-.loading-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 3rem 2rem;
-  box-sizing: border-box;
-  z-index: 9999;
-}
-
-.loading-content {
-  width: 100%;
-  max-width: 500px;
-}
-
-/* ۲. کانتینر اصلی منو */
-.main-menu-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-  z-index: 9999;
-  direction: rtl;
-}
-
-/* ==================== پنل فرماندهی سمت راست بالا ==================== */
-.top-right-command-hub {
-  position: absolute;
-  top: 24px;
-  right: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 290px;
-  z-index: 10000;
-}
-
-/* ردیف اول: صدا و سکه */
-.hub-status-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-/* باکس سکه به سبک کتیبه زرین */
-.shahnameh-coin-box {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(180deg,
-      rgba(28, 19, 12, 0.92) 0%,
-      rgba(14, 9, 5, 0.96) 100%);
-  border: 2px solid #c59b27;
-  border-radius: 12px;
-  padding: 6px 10px;
-  box-shadow:
-    0 6px 14px rgba(0, 0, 0, 0.75),
-    inset 0 0 10px rgba(197, 155, 39, 0.2);
-}
-
-.coin-emblem {
-  display: flex;
-  align-items: center;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.7));
-}
-
-.coin-text {
-  color: #ffe89e;
-  font-weight: 800;
-  font-size: 1.15rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
-  letter-spacing: 0.5px;
-}
-
-.coin-plus-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, #ffd700 0%, #b38000 100%);
-  border: 1px solid #fff5c0;
-  color: #2b1700;
-  font-weight: 900;
-  font-size: 1.15rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  padding: 0;
-  box-shadow: 0 3px 0 #704f00;
-  transition: all 0.1s ease;
-}
-
-/* افکت Active دکمه افزایش سکه */
-.coin-plus-btn:active {
-  transform: translateY(3px);
-  box-shadow:
-    0 0 0 #704f00,
-    inset 0 2px 4px rgba(0, 0, 0, 0.4);
-  background: linear-gradient(180deg, #e6c200 0%, #996d00 100%);
-}
-
-/* دکمه آیکونی صدا */
-.shahnameh-icon-btn {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-  background: linear-gradient(180deg,
-      rgba(38, 25, 15, 0.92) 0%,
-      rgba(16, 10, 6, 0.96) 100%);
-  border: 2px solid #c59b27;
-  box-shadow:
-    0 4px 0 #6e5211,
-    0 6px 14px rgba(0, 0, 0, 0.75);
-  color: #ffd700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  padding: 0;
-  outline: none;
-  transition: all 0.12s ease;
-}
-
-.shahnameh-icon-btn:hover {
-  border-color: #ffe885;
-  color: #fff6cc;
-}
-
-.shahnameh-icon-btn:active {
-  transform: translateY(4px);
-  box-shadow:
-    0 0 0 #6e5211,
-    0 2px 6px rgba(0, 0, 0, 0.8),
-    inset 0 0 12px rgba(255, 215, 0, 0.35);
-}
-
-.shahnameh-icon-btn.muted {
-  border-color: #9e3a3a;
-  box-shadow:
-    0 4px 0 #591d1d,
-    0 6px 14px rgba(0, 0, 0, 0.75);
-  color: #ff7b7b;
-}
-
-.shahnameh-icon-btn.muted:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 #591d1d;
-}
-
-/* ==================== استایل پایه دکمه‌های شاهنامه ==================== */
-.shahnameh-btn {
-  position: relative;
-  cursor: pointer;
-  outline: none;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 14px;
-  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* دکمه اصلی «آغاز رزم» با تم زرشکی-طلایی سلطنتی (هماهنگ با شنل رستم) */
-.battle-start-btn {
-  width: 100%;
-  padding: 12px 18px;
-  background: linear-gradient(180deg, #8f1d1d 0%, #5e0f0f 60%, #3d0707 100%);
-  border: 2px solid #e5b842;
-  /* سایه ضخیم زیر دکمه برای ایجاد حس سه‌بعدی و سنگی/فلزی */
-  box-shadow:
-    0 5px 0 #7a5813,
-    0 10px 20px rgba(0, 0, 0, 0.85),
-    inset 0 1px 1px rgba(255, 235, 168, 0.45);
-  color: #fff3b0;
-}
-
-.battle-start-btn:hover {
-  background: linear-gradient(180deg, #a62323 0%, #6e1212 60%, #4a0909 100%);
-  border-color: #ffdf73;
-  box-shadow:
-    0 5px 0 #8c6516,
-    0 12px 24px rgba(0, 0, 0, 0.9),
-    0 0 15px rgba(229, 184, 66, 0.4),
-    inset 0 1px 2px rgba(255, 255, 255, 0.6);
-}
-
-/* حالت Active (هنگام کلیک یا لمس روی موبایل) برای دکمه آغاز رزم */
-.battle-start-btn:active {
-  transform: translateY(5px);
-  background: linear-gradient(180deg, #520c0c 0%, #751616 100%);
-  border-color: #ffd700;
-  box-shadow:
-    0 0px 0 #7a5813,
-    0 3px 8px rgba(0, 0, 0, 0.9),
-    inset 0 3px 10px rgba(0, 0, 0, 0.75),
-    0 0 20px rgba(255, 180, 0, 0.6);
-}
-
-.battle-btn-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1.25;
-}
-
-.battle-main-title {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: #ffea9f;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
-}
-
-.battle-sub-title {
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #e0b679;
-}
-
-/* ردیف سوم: دکمه‌های فرعی (بازارچه و سلاح) در دو ستون کنار هم */
-.hub-sub-actions {
-  display: flex;
-  gap: 10px;
-  width: 95%;
-}
-
-.sub-action-btn {
-  flex: 1;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 12px;
-  background: linear-gradient(180deg,
-      rgba(36, 25, 16, 0.94) 0%,
-      rgba(18, 12, 7, 0.98) 100%);
-  border: 2px solid #b88b28;
-  box-shadow:
-    0 4px 0 #5e440e,
-    0 8px 16px rgba(0, 0, 0, 0.8),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  color: #f5e2ba;
-  font-weight: 800;
-  font-size: 0.92rem;
-}
-
-.sub-action-btn:hover {
-  border-color: #ffd700;
-  color: #ffffff;
-  background: linear-gradient(180deg,
-      rgba(48, 33, 21, 0.96) 0%,
-      rgba(24, 16, 9, 0.98) 100%);
-}
-
-/* حالت Active هنگام فشردن دکمه‌های بازارچه و سلاح + حالت باز بودن پنجره (is-active) */
-.sub-action-btn:active,
-.sub-action-btn.is-active {
-  transform: translateY(4px);
-  border-color: #ffe680;
-  color: #ffd700;
-  background: linear-gradient(180deg,
-      rgba(20, 13, 8, 0.98) 0%,
-      rgba(42, 29, 17, 0.95) 100%);
-  box-shadow:
-    0 0 0 #5e440e,
-    0 2px 6px rgba(0, 0, 0, 0.85),
-    inset 0 2px 8px rgba(0, 0, 0, 0.8),
-    0 0 14px rgba(255, 215, 0, 0.35);
-}
-
-/* تنظیم خودکار برای صفحه‌های خیلی کوچک موبایل */
-@media (max-width: 480px) {
-  .top-right-command-hub {
-    top: 16px;
-    right: 16px;
-    width: 250px;
-  }
-}
-
-/* ==================== استایل‌های میدان نبرد و کنترل‌های لمسی ==================== */
-.battle-screen-wrapper {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  overflow: hidden;
-  user-select: none;
-  direction: rtl;
-}
-
-.phaser-canvas-box {
-  width: 100%;
-  height: 100%;
-}
-
-.battle-top-hud {
-  position: absolute;
-  top: 14px;
-  left: 20px;
-  right: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  z-index: 100;
-  pointer-events: none;
-}
-
-.hud-fighter-box {
-  width: 280px;
-  background: rgba(18, 12, 6, 0.85);
-  border: 2px solid #c59b27;
-  border-radius: 12px;
-  padding: 8px 12px;
-  pointer-events: auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-}
-
-.hud-hp-track {
-  width: 100%;
-  height: 12px;
-  background: #2b1d12;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 215, 0, 0.4);
-}
-
-.hud-hp-fill {
-  height: 100%;
-  transition: width 0.2s ease;
-}
-
-.rostam-hp {
-  background: linear-gradient(90deg, #2ecc71, #27ae60);
-}
-
-.boss-hp {
-  background: linear-gradient(90deg, #ff4d4d, #b31b1b);
-}
-
-.potion-quick-btn {
-  background: linear-gradient(180deg, #1f5c34 0%, #12381f 100%);
-  border: 1px solid #2ecc71;
-  color: #e2ffeb;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.potion-quick-btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.hud-khan-banner {
-  background: rgba(20, 12, 6, 0.88);
-  border: 2px solid #d4af37;
-  border-radius: 14px;
-  padding: 6px 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-}
-
-.khan-banner-title {
-  color: #ffd700;
-  font-weight: 900;
-  font-size: 1.05rem;
-}
-
-.khan-banner-sub {
-  color: #f5e2ba;
-  font-size: 0.78rem;
-}
-
-.hud-retreat-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid #d4af37;
-  color: #ffe89e;
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* کنترل‌های لمسی پایین صفحه */
-.battle-touch-controls {
-  position: absolute;
-  bottom: 22px;
-  left: 28px;
-  right: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  z-index: 100;
-  direction: ltr;
-  /* چپ و راست در سمت چپ صفحه، ضربه و پرش در سمت راست */
-}
-
-.touch-dpad,
-.touch-actions {
-  display: flex;
-  gap: 14px;
-}
-
-.touch-ctrl-btn {
-  width: 68px;
-  height: 68px;
-  border-radius: 18px;
-  background: linear-gradient(180deg,
-      rgba(40, 27, 16, 0.88) 0%,
-      rgba(18, 12, 7, 0.94) 100%);
-  border: 2px solid #d4af37;
-  color: #ffd700;
-  font-weight: 900;
-  font-size: 1.4rem;
-  box-shadow:
-    0 5px 0 #6e5211,
-    0 8px 16px rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.touch-ctrl-btn:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 #6e5211;
-}
-
-.jump-btn {
-  width: 85px;
-  font-size: 0.95rem;
-}
-
-.mace-attack-btn {
-  width: 115px;
-  height: 76px;
-  background: linear-gradient(180deg, #9e1b1b 0%, #5e0f0f 100%);
-  border-color: #ffd700;
-  color: #fff3b0;
-  font-size: 1rem;
-  box-shadow:
-    0 5px 0 #4a0909,
-    0 8px 20px rgba(0, 0, 0, 0.85);
-}
-
 /* =====================================================
-   منوی اصلی مثل طرح مرجع | نسخه ۲
-   انتهای App.css بچسبان. فایل قبلی menu-layout.css رو حذف کن
-   (عنوان با pseudo-element داشت و الان المان واقعی داره)
+   ۰) توکن‌ها و مقیاس
+   هر ۱۲۸۰×۷۲۰ طرح مرجع = ۱۰۰٪ صفحه (--u)
    ===================================================== */
+:root {
+  --gold: #d4af37;
+  --gold-soft: #fff3b0;
+  --gold-light: #ffea9f;
+  --gold-mid: #e0b679;
+  --br: #9a7440;
+  --br-hi: #d7b06a;
+  --tile-text: #ffea9f;
 
-/* ---------- واحد مقیاس: هر ۱۲۸۰×۷۲۰ طرح = ۱۰۰٪ صفحه ---------- */
-.main-menu-container {
-  --u: min(calc(100vw / 1280), calc(100vh / 720));
   --sh-safe-t: env(safe-area-inset-top, 0px);
   --sh-safe-b: env(safe-area-inset-bottom, 0px);
   --sh-safe-l: env(safe-area-inset-left, 0px);
   --sh-safe-r: env(safe-area-inset-right, 0px);
-  --br: #9a7440;
-  --br-hi: #d7b06a;
-  --panel: linear-gradient(180deg, rgba(62, 43, 28, 0.94), rgba(19, 11, 8, 0.96));
-  box-sizing: border-box;
+
+  --u: min(calc(100vw / 1280), calc(100vh / 720));
+  --btn-transition: transform 0.12s ease, filter 0.15s ease, opacity 0.15s ease;
 }
 
 @supports (height: 100dvh) {
-  .main-menu-container {
+  :root {
     --u: min(calc(100vw / 1280), calc(100dvh / 720));
   }
+}
+
+/* =====================================================
+   ۱) صفحه لودینگ
+   ===================================================== */
+.loading-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 3rem 2rem calc(3rem + var(--sh-safe-b));
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.loading-content {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* =====================================================
+   ۲) منوی اصلی: پایه
+   ===================================================== */
+.main-menu-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  box-sizing: border-box;
+  direction: rtl;
+  overflow: hidden;
+  font-family: var(--sh-font, inherit);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .top-right-command-hub {
   display: contents;
 }
 
-/* =====================================================
-   ظاهر اجزا (مشترک بین افقی و عمودی)
-   ===================================================== */
+.main-menu-container button {
+  font-family: inherit;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: var(--btn-transition);
+}
+
+.main-menu-container button:focus-visible {
+  outline: 2px solid var(--gold-mid);
+  outline-offset: 3px;
+}
+
+.main-menu-container button:disabled {
+  cursor: not-allowed;
+}
 
 /* ---------- پروفایل ---------- */
 .player-profile {
@@ -748,16 +97,16 @@
   direction: ltr;
 }
 
-.player-avatar { display: none; }
-
 .player-info,
-.player-level-row { display: contents; }
+.player-level-row {
+  display: contents;
+}
 
 .player-name {
   position: absolute;
   left: 50%;
-  width: 20%;
   top: 41%;
+  width: 20%;
   text-align: center;
   direction: rtl;
   font-size: 3cqw;
@@ -770,8 +119,8 @@
 .player-level {
   position: absolute;
   left: 30%;
-  width: 20%;
   top: 41%;
+  width: 20%;
   text-align: center;
   font-size: 4.3cqw;
   line-height: 1;
@@ -797,92 +146,184 @@
   background: linear-gradient(#fff3b0, #f5c542 45%, #b9801a);
   box-shadow: 0 0 8px rgba(255, 200, 70, 0.7);
   transition: width 0.4s ease;
-} 
-/* ---------- عنوان ---------- */
-.main-menu-container .game-title-block {
+}
+
+/* ---------- عنوان بازی (عکس) ---------- */
+.game-title-block {
   position: relative;
   z-index: 3;
   text-align: center;
   pointer-events: none;
 }
 
-.main-menu-container .game-title {
-  font-family: var(--sh-font);
-  font-weight: 900;
-  line-height: 1.1;
-  white-space: nowrap;
-  background: linear-gradient(180deg, #f6e4b0 0%, #d3a456 55%, #8a5a22 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  filter: drop-shadow(0 3px 0 rgba(60, 35, 10, 0.9)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.7));
+.game-title-block img {
+  display: block;
+  margin-inline: auto;
+  width: min(70vw, 360px);
+  max-height: 16dvh;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.9));
 }
 
-.main-menu-container .game-subtitle {
-  position: relative;
-  display: inline-block;
-  font-weight: 800;
-  white-space: nowrap;
-  color: #f1dfb4;
-  text-shadow: 0 1px 2px #000;
-  background: linear-gradient(90deg, transparent, rgba(20, 10, 6, 0.92) 14%, rgba(20, 10, 6, 0.92) 86%, transparent);
-  border-top: 1px solid var(--br-hi);
-  border-bottom: 1px solid var(--br-hi);
-}
-
-/* ---------- کاشی‌ها (ستون چپ و نوار پایین) ---------- */
-.main-menu-container .nav-tile,
-.main-menu-container .sub-action-btn {
+/* ---------- دکمه‌های تصویری (کاشی‌ها و آغاز رزم) ---------- */
+.main-menu-container :is(.nav-tile, .sub-action-btn, .battle-start-btn) {
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: max(2px, calc(var(--u) * 4));
+  min-width: 0;
   min-height: 0;
   margin: 0;
-  padding: 3px 2px;
-  font-family: var(--sh-font);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.main-menu-container :is(.nav-tile, .sub-action-btn) {
+  flex-direction: column;
+  gap: max(1px, calc(var(--u) * 4));
+  padding: 2px;
   font-weight: 800;
   font-size: max(9px, calc(var(--u) * 19));
   line-height: 1.1;
   white-space: nowrap;
-  color: #f1dfb4;
-  text-shadow: 0 1px 2px #000;
-  background: var(--panel);
-  border: 1.5px solid var(--br);
-  border-radius: max(5px, calc(var(--u) * 8));
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.55), inset 0 0 14px rgba(214, 170, 90, 0.08), 0 6px 14px rgba(0, 0, 0, 0.55);
+  color: var(--tile-text);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.95);
 }
 
-.main-menu-container .nav-tile::before,
-.main-menu-container .sub-action-btn::before {
-  inset: 3px;
-  border: 1px solid rgba(214, 170, 90, 0.28);
-  border-radius: max(3px, calc(var(--u) * 5));
-}
-
-.main-menu-container .nav-tile svg,
-.main-menu-container .sub-action-btn svg {
+.main-menu-container :is(.nav-tile, .sub-action-btn) span {
   flex: 0 0 auto;
-  width: max(22px, calc(var(--u) * 44));
-  height: max(22px, calc(var(--u) * 44));
-  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.7));
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.main-menu-container .sub-action-btn.is-active {
-  color: var(--sh-ink);
-  text-shadow: none;
-  border-color: var(--sh-gold-soft);
-  background: linear-gradient(180deg, #ffe680 0%, var(--sh-gold) 55%, #c68a00 100%);
+.main-menu-container :is(.nav-tile, .sub-action-btn) :is(img, svg) {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
 }
 
-.main-menu-container .sub-action-btn.is-active svg {
-  stroke: var(--sh-crimson-dark);
+.main-menu-container :is(.nav-tile, .sub-action-btn) svg {
+  width: 70%;
 }
 
-/* نقطه‌ی قرمز اعلان */
+@media (hover: hover) {
+  .main-menu-container :is(.nav-tile, .sub-action-btn, .battle-start-btn):hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1) drop-shadow(0 0 10px rgba(255, 215, 0, 0.4));
+  }
+
+  .main-menu-container .shahnameh-icon-btn:hover {
+    border-color: var(--gold-soft);
+    filter: brightness(1.2);
+  }
+}
+
+.main-menu-container :is(.nav-tile, .sub-action-btn).is-active {
+  filter: brightness(1.15) drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
+}
+
+.main-menu-container :is(.nav-tile, .sub-action-btn, .battle-start-btn):active {
+  transform: translateY(4px) scale(0.94);
+  filter: brightness(0.95);
+}
+
+/* ---------- دکمه «آغاز رزم» ---------- */
+.main-menu-container .battle-start-btn {
+  z-index: 5;
+  color: var(--gold-soft);
+  --battle-text-y: 0px;
+}
+
+.main-menu-container .battle-start-btn .start-btn-img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.85));
+}
+
+.battle-btn-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 1;
+  transform: translateY(var(--battle-text-y));
+  pointer-events: none;
+}
+
+.main-menu-container .battle-main-title {
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--gold-light);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  margin-bottom: 12px;
+  margin-left: 30px;
+}
+
+.battle-sub-title {
+  display: none;
+}
+
+/* ---------- ردیف وضعیت: صدا، هدیه، گوهر، زر ---------- */
+.main-menu-container .hub-status-row {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: max(5px, calc(var(--u) * 12));
+  direction: rtl;
+}
+
+.main-menu-container .shahnameh-icon-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: max(34px, calc(var(--u) * 46));
+  height: max(34px, calc(var(--u) * 46));
+  padding: 0;
+  color: var(--gold-light);
+  background: radial-gradient(circle at 50% 30%, #4a3322, #150b07);
+  border: 1.5px solid var(--br-hi);
+  border-radius: 50%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.main-menu-container .shahnameh-icon-btn svg {
+  width: 56%;
+  height: 56%;
+}
+
+.main-menu-container .shahnameh-icon-btn:active {
+  transform: scale(0.92);
+}
+
+.main-menu-container .shahnameh-icon-btn.muted {
+  color: #ff7b7b;
+  border-color: #9e3a3a;
+  opacity: 0.85;
+}
+
 .main-menu-container .notif-dot {
   position: absolute;
   top: -3px;
@@ -890,74 +331,78 @@
   z-index: 3;
   width: max(9px, calc(var(--u) * 16));
   height: max(9px, calc(var(--u) * 16));
-  border-radius: 50%;
   background: #e5262e;
-  border: 1.5px solid #fff3b0;
+  border: 1.5px solid var(--gold-soft);
+  border-radius: 50%;
   box-shadow: 0 0 6px rgba(229, 38, 46, 0.8);
   pointer-events: none;
+  animation: notif-pulse 1.6s ease-in-out infinite;
 }
 
-/* ---------- ردیف وضعیت ---------- */
-.main-menu-container .hub-status-row {
-  position: relative;
-  z-index: 5;
+@keyframes notif-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+.main-menu-container .shahnameh-coin-box {
+  direction: rtl;
   display: flex;
   align-items: center;
-  direction: rtl;
-  gap: max(5px, calc(var(--u) * 12));
-}
-
-.main-menu-container .hub-status-row .shahnameh-icon-btn {
-  position: relative;
+  justify-content: space-between;
   flex: 0 0 auto;
-  width: max(34px, calc(var(--u) * 46));
-  height: max(34px, calc(var(--u) * 46));
-  padding: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 30%, #4a3322, #150b07);
-  border: 1.5px solid var(--br-hi);
-}
-
-.main-menu-container .hub-status-row .shahnameh-icon-btn svg {
-  width: 56%;
-  height: 56%;
-}
-
-.main-menu-container .hub-status-row .shahnameh-coin-box {
-  direction: rtl;
-  flex: 0 0 auto;
-  width: max(98px, calc(var(--u) * 150));
+  gap: 6px;
+  width: max(92px, calc(var(--u) * 140));
   height: max(30px, calc(var(--u) * 42));
-  padding: 0 4px;
-  gap: 4px;
-  border-radius: 999px;
+  padding: 0 10px 0 6px;
   background: linear-gradient(180deg, rgba(14, 8, 5, 0.94), rgba(46, 31, 20, 0.94));
   border: 1.5px solid var(--br);
+  border-radius: 999px;
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7), 0 3px 8px rgba(0, 0, 0, 0.45);
+  box-sizing: border-box;
 }
 
-.main-menu-container .hub-status-row .coin-plus-btn {
-  width: max(22px, calc(var(--u) * 30));
-  height: max(22px, calc(var(--u) * 30));
-  font-size: max(15px, calc(var(--u) * 24));
-}
-
-.main-menu-container .hub-status-row .coin-text {
+.main-menu-container .coin-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
   font-size: max(12px, calc(var(--u) * 24));
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #ffe89e;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
-.main-menu-container .hub-status-row .coin-emblem svg {
-  width: max(20px, calc(var(--u) * 32));
-  height: max(20px, calc(var(--u) * 32));
+.main-menu-container .coin-emblem {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.7));
+}
+
+.main-menu-container .coin-emblem :is(img, svg) {
+  display: block;
+  width: max(22px, calc(var(--u) * 34));
+  height: max(22px, calc(var(--u) * 34));
+  object-fit: contain;
+  pointer-events: none;
 }
 
 /* ---------- کارت خان ---------- */
 .main-menu-container .khan-card {
   position: relative;
   z-index: 5;
+  background: #1a0f09;
   border: max(2px, calc(var(--u) * 3)) solid var(--br-hi);
   border-radius: 6px;
-  background: #1a0f09;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.6), 0 10px 24px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(0, 0, 0, 0.5);
   pointer-events: none;
 }
@@ -977,8 +422,8 @@
   position: absolute;
   top: calc(var(--u) * -24);
   left: 50%;
-  transform: translateX(-50%);
   z-index: 2;
+  transform: translateX(-50%);
   min-width: 58%;
   padding: max(2px, calc(var(--u) * 5)) max(10px, calc(var(--u) * 24));
   text-align: center;
@@ -1014,6 +459,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  direction: ltr;
   padding: 2px max(6px, calc(var(--u) * 12));
   font-weight: 800;
   font-size: max(11px, calc(var(--u) * 26));
@@ -1021,7 +467,6 @@
   background: rgba(15, 9, 6, 0.85);
   border: 1px solid rgba(214, 170, 90, 0.5);
   border-radius: 6px;
-  direction: ltr;
 }
 
 .main-menu-container .khan-card-stars svg {
@@ -1029,7 +474,7 @@
   height: max(13px, calc(var(--u) * 26));
 }
 
-/* ---------- نوار پایین کارت (فلش و نقطه‌ها) ---------- */
+/* ---------- فلش‌ها و نقطه‌های خان ---------- */
 .main-menu-container .khan-pager {
   position: relative;
   z-index: 5;
@@ -1052,8 +497,6 @@
   color: var(--br-hi);
   background: none;
   border: 0;
-  cursor: pointer;
-  touch-action: manipulation;
 }
 
 .main-menu-container .khan-arrow svg {
@@ -1061,7 +504,7 @@
   height: 62%;
 }
 
-.main-menu-container .khan-arrow:active {
+.main-menu-container .khan-arrow:active:not(:disabled) {
   transform: scale(0.88);
 }
 
@@ -1079,69 +522,36 @@
 .main-menu-container .khan-dot {
   width: max(7px, calc(var(--u) * 14));
   height: max(7px, calc(var(--u) * 14));
-  border-radius: 50%;
   background: #3a2a1c;
   border: 1px solid #7a5a2c;
+  border-radius: 50%;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .main-menu-container .khan-dot.is-active {
-  background: var(--sh-gold);
-  border-color: var(--sh-gold-soft);
+  background: var(--sh-gold, #ffd700);
+  border-color: var(--sh-gold-soft, #fff3b0);
   box-shadow: 0 0 6px rgba(255, 215, 0, 0.85);
 }
 
-/* ---------- دکمه‌ی آغاز رزم ---------- */
-.main-menu-container .battle-start-btn {
-  position: relative;
-  z-index: 5;
-  justify-content: center;
-  gap: max(8px, calc(var(--u) * 16));
-  margin: 0;
-  padding: 4px max(10px, calc(var(--u) * 20));
-  border-radius: max(8px, calc(var(--u) * 14));
-}
-
-.main-menu-container .battle-start-btn::before {
-  border: 1px solid rgba(255, 215, 0, 0.55);
-  border-radius: max(5px, calc(var(--u) * 10));
-}
-
-.main-menu-container .battle-btn-text {
-  align-items: center;
-  text-align: center;
-}
-
-.main-menu-container .battle-main-title {
-  font-size: max(17px, calc(var(--u) * 44));
-}
-
-.main-menu-container .battle-sub-title {
-  display: none;
-}
-
-.main-menu-container .battle-start-btn>svg {
-  width: max(24px, calc(var(--u) * 52));
-  height: max(24px, calc(var(--u) * 52));
-}
-
-/* ---------- پیام به‌زودی ---------- */
+/* ---------- پیام «به‌زودی» ---------- */
 .main-menu-container .menu-toast {
-  position: absolute;
+  position: fixed;
   z-index: 30;
   left: 50%;
   bottom: calc(var(--sh-safe-b) + 22dvh);
   transform: translateX(-50%);
   padding: 8px 18px;
+  white-space: nowrap;
   font-weight: 800;
   font-size: 13px;
-  white-space: nowrap;
   color: #f6e4b0;
   background: rgba(15, 9, 6, 0.92);
   border: 1px solid var(--br-hi);
   border-radius: 999px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
-  animation: sh-toast 1.6s ease both;
   pointer-events: none;
+  animation: sh-toast 1.6s ease both;
 }
 
 @keyframes sh-toast {
@@ -1163,10 +573,9 @@
 }
 
 /* =====================================================
-   حالت افقی: دقیقاً مثل طرح مرجع
+   ۳) چیدمان افقی (طرح مرجع)
    ===================================================== */
 @media (orientation: landscape) {
-
   .main-menu-container .player-profile {
     position: absolute;
     top: calc(var(--sh-safe-t) + var(--u) * 10);
@@ -1175,48 +584,16 @@
     min-width: 200px;
   }
 
-  .player-profile .player-profile-img {
-    object-fit: cover;
-    width: 100%;
-  }
-
-  /* .main-menu-container .game-title-block {
+  .main-menu-container .game-title-block {
     position: absolute;
-    top: calc(var(--u) * 0);
+    top: calc(var(--sh-safe-t) + var(--u) * 4);
     left: 50%;
     transform: translateX(-50%);
-
-  } */
-  .game-title-block {
-    position: absolute;
-    top: -72%;
-    left: 10%;
-    transform: translate(-50%, -50%);
-    /* انتقال دقیق به نقطه وسط صفحه */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    pointer-events: none;
-    /* تا مانع کلیک روی موارد زیرین نشود */
   }
 
-  .game-title-block img {
-    max-width: 450px;
-    width: 25vw;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.9));
-  }
-
-  .main-menu-container .game-title {
-    font-size: max(25px, calc(var(--u) * 80));
-  }
-
-  .main-menu-container .game-subtitle {
-    margin-top: calc(var(--u) * 4);
-    padding: max(2px, calc(var(--u) * 5)) max(20px, calc(var(--u) * 44));
-    font-size: max(11px, calc(var(--u) * 20));
+  .main-menu-container .game-title-block img {
+    width: calc(var(--u) * 400);
+    max-height: calc(var(--u) * 140);
   }
 
   .main-menu-container .hub-status-row {
@@ -1228,17 +605,17 @@
   .main-menu-container .side-menu {
     position: absolute;
     z-index: 5;
-    top: calc(var(--u) * 130);
+    top: calc(var(--u) * 120);
     left: calc(var(--sh-safe-l) + var(--u) * 28);
     display: flex;
     flex-direction: column;
-    gap: max(5px, calc(var(--u) * 14));
+    gap: max(6px, calc(var(--u) * 12));
   }
 
-  .main-menu-container .side-menu .nav-tile,
-  .main-menu-container .side-menu .sub-action-btn {
-    width: max(56px, calc(var(--u) * 88));
-    height: max(46px, calc(var(--u) * 88));
+  .main-menu-container .side-menu :is(.nav-tile, .sub-action-btn) {
+    width: max(70px, calc(var(--u) * 108));
+    height: max(60px, calc(var(--u) * 104));
+    font-size: max(10px, calc(var(--u) * 22));
   }
 
   .main-menu-container .khan-card {
@@ -1254,57 +631,70 @@
     top: calc(var(--u) * 440);
     right: calc(var(--sh-safe-r) + var(--u) * 20);
     width: calc(var(--u) * 366);
-    height: max(28px, calc(var(--u) * 40));
+    height: max(24px, calc(var(--u) * 40));
   }
 
   .main-menu-container .battle-start-btn {
     position: absolute;
-    top: calc(var(--u) * 492);
-    right: calc(var(--sh-safe-r) + var(--u) * 34);
-    width: calc(var(--u) * 336);
-    height: max(46px, calc(var(--u) * 90));
+    top: calc(var(--u) * 482);
+    right: calc(var(--sh-safe-r) + var(--u) * 13);
+    width: calc(var(--u) * 380);
+    height: max(56px, calc(var(--u) * 108));
   }
 
   .main-menu-container .hub-sub-actions {
     position: absolute;
     z-index: 5;
-    left: calc(var(--sh-safe-l) + var(--u) * 32);
-    bottom: calc(var(--sh-safe-b) + var(--u) * 26);
+    left: calc(var(--sh-safe-l) + var(--u) * 16);
+    right: calc(var(--sh-safe-r) + var(--u) * 16);
+    bottom: calc(var(--sh-safe-b) + var(--u) * 6);
     display: flex;
+    justify-content: space-evenly;
     direction: rtl;
-    gap: max(5px, calc(var(--u) * 12));
+    gap: 0;
   }
 
-  .main-menu-container .hub-sub-actions .nav-tile,
-  .main-menu-container .hub-sub-actions .sub-action-btn {
-    width: max(70px, calc(var(--u) * 158));
-    height: max(48px, calc(var(--u) * 94));
-    font-size: max(10px, calc(var(--u) * 24));
+  .main-menu-container .hub-sub-actions :is(.nav-tile, .sub-action-btn) {
+    flex: 0 0 auto;
+    width: max(90px, calc(var(--u) * 190));
+    height: max(64px, calc(var(--u) * 122));
+    font-size: max(11px, calc(var(--u) * 26));
+  }
+}
+
+/* گوشی‌های خیلی کوتاه در حالت افقی */
+@media (orientation: landscape) and (max-height: 340px) {
+  .main-menu-container .side-menu :is(.nav-tile, .sub-action-btn) {
+    height: 44px;
+  }
+
+  .main-menu-container .menu-toast {
+    bottom: calc(var(--sh-safe-b) + 16dvh);
   }
 }
 
 /* =====================================================
-   حالت عمودی: همه زیر هم، فشرده و قابل اسکرول
+   ۴) چیدمان عمودی: همه زیر هم، قابل اسکرول
    ===================================================== */
 @media (orientation: portrait) {
-
   .main-menu-container {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
-    height: 100vh;
-    height: 100dvh;
-    min-height: 0;
-    padding:
-      calc(var(--sh-safe-t) + 10px) calc(var(--sh-safe-r) + 10px) calc(var(--sh-safe-b) + 10px) calc(var(--sh-safe-l) + 10px);
+    padding-top: calc(var(--sh-safe-t) + 10px);
+    padding-bottom: calc(var(--sh-safe-b) + 10px);
+    padding-inline: max(calc(var(--sh-safe-l) + 10px), calc((100vw - 640px) / 2));
     overflow-x: hidden;
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .main-menu-container .player-profile {
     order: 1;
     flex: 0 0 auto;
+    width: min(100%, 560px);
+    align-self: center;
   }
 
   .main-menu-container .hub-status-row {
@@ -1339,7 +729,7 @@
   .main-menu-container .battle-start-btn {
     order: 7;
     flex: 0 0 auto;
-    height: 58px;
+    height: clamp(72px, 11dvh, 104px);
   }
 
   .main-menu-container .hub-sub-actions {
@@ -1347,19 +737,9 @@
     flex: 0 0 auto;
   }
 
-  .main-menu-container .player-profile {
-    width: 100%;
-  }
-
-  .main-menu-container .player-info {
-    height: 44px,
-
-  }
-
   .main-menu-container .hub-status-row .shahnameh-coin-box {
     flex: 1 1 0;
     width: auto;
-    min-width: 0;
     height: 38px;
   }
 
@@ -1368,40 +748,20 @@
     height: 38px;
   }
 
-  .main-menu-container .game-title {
-    font-size: clamp(38px, 13vw, 60px);
-  }
-
-  .main-menu-container .game-subtitle {
-    padding: 2px 30px;
-    font-size: clamp(11px, 3.4vw, 14px);
-  }
-
-  .main-menu-container .side-menu {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-  }
-
-  .main-menu-container .side-menu .nav-tile,
-  .main-menu-container .side-menu .sub-action-btn {
-    height: 58px;
-  }
-
+  .main-menu-container .side-menu,
   .main-menu-container .hub-sub-actions {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
     gap: 6px;
   }
 
-  .main-menu-container .hub-sub-actions .nav-tile,
-  .main-menu-container .hub-sub-actions .sub-action-btn {
-    height: 60px;
-    font-size: 10px;
+  .main-menu-container .side-menu :is(.nav-tile, .sub-action-btn) {
+    height: clamp(72px, 12dvh, 110px);
   }
 
-  .main-menu-container .battle-main-title {
-    font-size: 22px;
+  .main-menu-container .hub-sub-actions :is(.nav-tile, .sub-action-btn) {
+    height: clamp(78px, 13dvh, 120px);
+    font-size: 11px;
   }
 
   .main-menu-container .khan-card-title {
@@ -1410,8 +770,8 @@
   }
 
   .main-menu-container .khan-card-name {
-    font-size: 13px;
     top: 18px;
+    font-size: 13px;
   }
 
   .main-menu-container .menu-toast {
@@ -1419,22 +779,860 @@
   }
 }
 
-/* گوشی‌های خیلی کوتاه در حالت افقی */
-@media (orientation: landscape) and (max-height: 340px) {
+/* =====================================================
+   ۵) پایه مشترک مودال‌های عمومی (هدیه، تماشای تبلیغ و ...)
+   هماهنگ با تم برنزی-طلایی EquipmentModal
+   ===================================================== */
+.rpg-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:
+    max(12px, var(--sh-safe-t)) max(12px, var(--sh-safe-r)) max(12px, var(--sh-safe-b)) max(12px, var(--sh-safe-l));
+  background: rgba(6, 8, 14, 0.8);
+  backdrop-filter: blur(6px);
+  direction: rtl;
+  box-sizing: border-box;
+  overscroll-behavior: contain;
+}
 
-  .main-menu-container .side-menu .nav-tile,
-  .main-menu-container .side-menu .sub-action-btn {
-    height: 42px;
+.rpg-modal-box {
+  width: 100%;
+  max-width: 580px;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  color: #f8ecd1;
+  background: linear-gradient(165deg, #241913 0%, #151110 55%, #0f0d0e 100%);
+  border: 2px solid rgba(235, 179, 68, 0.65);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 224, 138, 0.25);
+  animation: modalPop 0.16s ease-out;
+  box-sizing: border-box;
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
   }
 
-  .main-menu-container .menu-toast {
-    bottom: calc(var(--sh-safe-b) + 16dvh);
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
+.rpg-modal-header {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  margin: 0;
+  background: linear-gradient(90deg, rgba(168, 92, 22, 0.28), rgba(40, 24, 14, 0.85));
+  border-bottom: 1px solid rgba(235, 179, 68, 0.35);
+}
+
+.rpg-modal-header :is(h4, h5) {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffd66b !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.rpg-close-btn {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(153, 27, 27, 0.45);
+  border: 1px solid rgba(255, 140, 120, 0.55);
+  border-radius: 10px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.15s ease, background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rpg-close-btn:hover {
+  background: rgba(220, 38, 38, 0.75);
+  transform: scale(1.05);
+}
+
+.rpg-close-btn:active {
+  transform: scale(0.94);
+}
+
+.rpg-alert {
+  flex: 0 0 auto;
+  margin: 12px 16px 0;
+  padding: 9px 14px;
+  text-align: center;
+  font-size: 0.86rem;
+  font-weight: 700;
+  border-radius: 12px;
+}
+
+.alert-success-rpg {
+  color: #bbf7d0;
+  background: rgba(22, 163, 74, 0.2);
+  border: 1px solid rgba(74, 222, 128, 0.6);
+}
+
+.alert-error-rpg,
+.alert-danger-rpg {
+  color: #fecaca;
+  background: rgba(220, 38, 38, 0.22);
+  border: 1px solid rgba(248, 113, 113, 0.6);
+}
+
+.rpg-modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  padding: 16px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(235, 179, 68, 0.65) rgba(0, 0, 0, 0.3);
+}
+
+.shop-item-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(48, 33, 24, 0.92), rgba(26, 20, 18, 0.95));
+  border: 1px solid rgba(235, 179, 68, 0.32);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.shop-item-card:hover {
+  border-color: rgba(255, 208, 92, 0.7);
+  transform: translateY(-2px);
+}
+
+.shop-item-icon {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 68px;
+  height: 68px;
+  font-size: 2rem;
+  background: radial-gradient(circle at center, rgba(255, 196, 70, 0.24) 0%, rgba(16, 12, 10, 0.95) 75%);
+  border: 2px solid rgba(245, 191, 78, 0.55);
+  border-radius: 15px;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.5),
+    inset 0 0 14px rgba(255, 185, 50, 0.16);
+  overflow: hidden;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.shop-item-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.65));
+}
+
+.shop-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.shop-item-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff3d1;
+}
+
+.shop-item-owned {
+  padding: 2px 10px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  border-radius: 999px;
+}
+
+.shop-item-desc {
+  margin-top: 4px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #d6c7ae;
+}
+
+.rpg-buy-btn {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  padding: 10px 14px;
+  font-size: 0.94rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #1c1002;
+  background: linear-gradient(180deg, #f5b935 0%, #c77b12 100%);
+  border: 1px solid #ffe08a;
+  border-radius: 13px;
+  box-shadow: 0 6px 14px rgba(199, 123, 18, 0.35);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rpg-buy-btn small {
+  font-size: 0.74rem;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.rpg-buy-btn:hover:not(.disabled, :disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.rpg-buy-btn:active:not(.disabled, :disabled) {
+  transform: scale(0.97);
+}
+
+.rpg-buy-btn.disabled,
+.rpg-buy-btn:disabled {
+  color: #bfb5aa;
+  background: linear-gradient(180deg, #4b4642 0%, #2d2927 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+@media (orientation: landscape) and (max-height: 480px) {
+  .rpg-modal-box {
+    max-height: 94dvh;
+    border-radius: 16px;
+  }
+
+  .rpg-modal-header {
+    padding: 9px 14px;
+  }
+
+  .rpg-alert {
+    margin: 8px 12px 0;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  .rpg-modal-body {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .shop-item-card {
+    padding: 10px;
+    gap: 10px;
+    border-radius: 13px;
+  }
+
+  .shop-item-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.55rem;
+    border-radius: 11px;
+  }
+
+  .rpg-buy-btn {
+    min-width: 82px;
+    padding: 7px 10px;
+    font-size: 0.84rem;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rpg-modal-header {
+    padding: 12px 14px;
+  }
+
+  .rpg-modal-header :is(h4, h5) {
+    font-size: 0.98rem;
+  }
+
+  .rpg-modal-body {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .shop-item-card {
+    gap: 10px;
+    padding: 11px;
+  }
+
+  .shop-item-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.7rem;
+  }
+
+  .rpg-buy-btn {
+    min-width: 84px;
+    padding: 8px 10px;
+    font-size: 0.86rem;
+  }
+}
+
+/* =====================================================
+   ۶) میدان نبرد و کنترل‌های لمسی
+   ===================================================== */
+.battle-screen-wrapper {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  direction: rtl;
+  background-color: #000;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.phaser-canvas-box {
+  width: 100%;
+  height: 100%;
+}
+
+.battle-top-hud {
+  position: absolute;
+  top: calc(var(--sh-safe-t) + clamp(8px, 2vmin, 14px));
+  left: calc(var(--sh-safe-l) + clamp(8px, 2vw, 20px));
+  right: calc(var(--sh-safe-r) + clamp(8px, 2vw, 20px));
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(8px, 1.5vw, 16px);
+  pointer-events: none;
+}
+
+.hud-fighter-box {
+  width: clamp(150px, 28vw, 280px);
+  padding: 8px 12px;
+  background: linear-gradient(165deg, rgba(36, 25, 19, 0.92), rgba(15, 13, 14, 0.94));
+  border: 2px solid rgba(235, 179, 68, 0.65);
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+  pointer-events: auto;
+}
+
+.hud-hp-track {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  background: #1a120e;
+  border: 1px solid rgba(245, 191, 78, 0.45);
+  border-radius: 6px;
+}
+
+.hud-hp-fill {
+  height: 100%;
+  transition: width 0.2s ease;
+}
+
+.rostam-hp {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.boss-hp {
+  background: linear-gradient(90deg, #ef4444, #b91c1c);
+}
+
+.potion-quick-btn {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #bbf7d0;
+  background: linear-gradient(180deg, rgba(22, 163, 74, 0.35) 0%, rgba(16, 85, 44, 0.7) 100%);
+  border: 1px solid rgba(74, 222, 128, 0.65);
+  border-radius: 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.potion-quick-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.hud-khan-banner {
+  padding: 6px clamp(10px, 2vw, 20px);
+  background: linear-gradient(165deg, rgba(36, 25, 19, 0.92), rgba(15, 13, 14, 0.95));
+  border: 2px solid rgba(235, 179, 68, 0.65);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+  pointer-events: auto;
+}
+
+.khan-banner-title {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #ffd66b;
+}
+
+.khan-banner-sub {
+  font-size: 0.78rem;
+  color: #d6c7ae;
+}
+
+.hud-retreat-btn {
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  color: #ffe07d;
+  background: rgba(153, 27, 27, 0.45);
+  border: 1px solid rgba(255, 140, 120, 0.55);
+  border-radius: 7px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.battle-touch-controls {
+  position: absolute;
+  bottom: calc(var(--sh-safe-b) + clamp(10px, 3vmin, 22px));
+  left: calc(var(--sh-safe-l) + clamp(12px, 3vw, 28px));
+  right: calc(var(--sh-safe-r) + clamp(12px, 3vw, 28px));
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  direction: ltr;
+  pointer-events: none;
+}
+
+.touch-dpad,
+.touch-actions {
+  display: flex;
+  gap: clamp(8px, 2vmin, 14px);
+  pointer-events: auto;
+}
+
+.touch-ctrl-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(52px, 11vmin, 68px);
+  height: clamp(52px, 11vmin, 68px);
+  font-size: clamp(1.1rem, 3vmin, 1.4rem);
+  font-weight: 900;
+  color: #ffd66b;
+  background: linear-gradient(165deg, rgba(48, 33, 24, 0.92) 0%, rgba(18, 14, 13, 0.96) 100%);
+  border: 2px solid rgba(235, 179, 68, 0.65);
+  border-radius: 18px;
+  box-shadow: 0 5px 0 #5c3d0c, 0 8px 16px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.touch-ctrl-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #5c3d0c;
+}
+
+.jump-btn {
+  width: clamp(64px, 14vmin, 85px);
+  font-size: clamp(0.8rem, 2.4vmin, 0.95rem);
+}
+
+.mace-attack-btn {
+  width: clamp(86px, 19vmin, 115px);
+  height: clamp(58px, 12.5vmin, 76px);
+  font-size: clamp(0.85rem, 2.6vmin, 1rem);
+  color: #ffe08a;
+  background: linear-gradient(180deg, #b91c1c 0%, #6b1111 100%);
+  border-color: #ffd66b;
+  box-shadow: 0 5px 0 #4a0909, 0 8px 20px rgba(0, 0, 0, 0.85);
+}
+
+@media (orientation: portrait) {
+  .battle-top-hud {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hud-fighter-box {
+    flex: 1 1 40%;
+    width: auto;
+    min-width: 0;
+  }
+}
+
+/* =====================================================
+   ۷) کاهش حرکت
+   ===================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .main-menu-container .menu-toast {
+  .main-menu-container button,
+  .main-menu-container .notif-dot,
+  .main-menu-container .menu-toast,
+  .rpg-modal-box {
+    transition: none;
     animation: none;
   }
 }
 
+/* =====================================================
+   بخش خوان‌ها: نسخهٔ نهایی و یکپارچه
+   ===================================================== */
+
+:root {
+  --khan-lock-badge: clamp(32px, 9vw, 46px);
+  --khan-lock-font: clamp(0.6rem, 2.3vw, 0.74rem);
+  --khan-pill-font: clamp(0.62rem, 2.3vw, 0.76rem);
+  --khan-arrow-size: clamp(24px, 6.5vw, 32px);
+  --khan-dot-size: clamp(6px, 1.7vw, 8px);
+}
+
+/* ---------- قاب تصویر خوان ---------- */
+.khan-card-art {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 0;
+  background: radial-gradient(circle at center, #3b2615 0%, #150d07 100%);
+  border-bottom: 1.5px solid rgba(212, 175, 55, 0.4);
+}
+
+.khan-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.khan-card.is-locked .khan-card-img {
+  opacity: 0.42;
+}
+
+/* ---------- لایهٔ قفل ---------- */
+.khan-lock-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 6, 4, 0.45) 0%, rgba(10, 6, 4, 0.82) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(4px, 1.4vw, 8px);
+  padding: clamp(6px, 2vw, 10px);
+  text-align: center;
+  min-width: 0;
+}
+
+.khan-lock-badge {
+  flex-shrink: 0;
+  width: var(--khan-lock-badge);
+  height: var(--khan-lock-badge);
+  border-radius: 50%;
+  background: rgba(24, 15, 8, 0.88);
+  border: 2px solid #d4af37;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.khan-lock-badge svg {
+  width: 50%;
+  height: 50%;
+}
+
+.khan-lock-text {
+  min-width: 0;
+  max-width: 100%;
+  font-size: var(--khan-lock-font);
+  font-weight: 800;
+  color: #f3dfb6;
+  background: rgba(0, 0, 0, 0.62);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 3px clamp(6px, 2vw, 9px);
+  border-radius: 999px;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.khan-locked-pill {
+  font-size: var(--khan-pill-font);
+  font-weight: 800;
+  color: #cbb68f;
+  white-space: nowrap;
+}
+
+/* ---------- فلش‌ها و نقطه‌ها ---------- */
+.khan-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(6px, 2vw, 12px);
+  width: 100%;
+  padding: 6px 4px;
+  box-sizing: border-box;
+}
+
+.khan-pager .khan-arrow {
+  flex: 0 0 auto;
+  width: var(--khan-arrow-size) !important;
+  height: var(--khan-arrow-size) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  background: linear-gradient(180deg, #3c2412 0%, #1d1007 100%);
+  border: 1.5px solid #d4af37;
+  color: #ffd966;
+  border-radius: 8px;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.khan-pager .khan-arrow svg {
+  width: 55%;
+  height: 55%;
+}
+
+.khan-pager .khan-arrow:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+.khan-pager .khan-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.khan-dots {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(4px, 1.4vw, 7px);
+}
+
+.khan-dots .khan-dot {
+  flex: 0 0 auto;
+  width: var(--khan-dot-size) !important;
+  height: var(--khan-dot-size) !important;
+  border-radius: 50%;
+  padding: 0;
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  background: rgba(212, 175, 55, 0.32);
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  position: relative;
+}
+
+/* ناحیهٔ لمس بزرگ‌تر بدون تغییر ظاهر */
+.khan-dots .khan-dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px -3px;
+}
+
+.khan-dots .khan-dot.is-locked {
+  background: rgba(120, 108, 92, 0.35);
+  border-color: rgba(145, 130, 110, 0.5);
+}
+
+.khan-dots .khan-dot.is-active {
+  background: #ffd700;
+  border-color: #fff3b0;
+  transform: scale(1.25);
+}
+
+/* ---------- دکمهٔ آغاز رزم در حالت قفل ---------- */
+.battle-start-btn {
+  position: relative;
+}
+
+.battle-start-btn.is-khan-locked {
+  opacity: 0.72;
+  filter: grayscale(0.55);
+}
+
+.battle-start-btn.is-khan-locked .battle-btn-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.battle-start-btn.is-khan-locked .battle-main-title {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(0.72rem, 2.8vw, 0.95rem) !important;
+  line-height: 1.1 !important;
+  white-space: nowrap;
+}
+
+.battle-start-btn.is-khan-locked .battle-sub-title {
+  display: none;
+}
+
+/* ---------- موبایل خیلی کوچک ---------- */
+@media (max-width: 360px) {
+  :root {
+    --khan-arrow-size: 26px;
+    --khan-dot-size: 6px;
+  }
+
+  .khan-lock-overlay {
+    gap: 4px;
+    padding: 6px;
+  }
+}
+
+/* ---------- landscape با ارتفاع کم ---------- */
+@media (max-height: 480px) and (orientation: landscape) {
+  :root {
+    --khan-lock-badge: 30px;
+    --khan-arrow-size: 28px;
+  }
+
+  .khan-lock-overlay {
+    flex-direction: row;
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .khan-pager .khan-arrow,
+  .khan-dots .khan-dot {
+    transition: none;
+  }
+}
+
+/* =====================================================
+   نوشته‌های خوان: «خوان اول» + نام خوان
+   ===================================================== */
+
+.khan-card-title,
+.khan-card-name {
+  text-align: center;
+  max-width: 100%;
+  min-width: 0;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+/* «خوان اول» - برچسب طلایی کوچک */
+.khan-card-title {
+  display: block !important;
+  align-self: center;
+  margin: clamp(4px, 1.4vw, 8px) auto 2px;
+  padding: 2px clamp(10px, 3vw, 16px);
+  font-size: clamp(0.66rem, 2.4vw, 0.8rem);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  color: #ffe9a8;
+  background: linear-gradient(180deg, rgba(60, 36, 18, 0.95) 0%, rgba(29, 16, 7, 0.95) 100%);
+  border: 1.5px solid #d4af37;
+  border-radius: 999px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 233, 168, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+/* نام خوان - «چشمه جادو» */
+.khan-card-name {
+  margin: 2px 0 clamp(4px, 1.4vw, 8px);
+  padding: 0 clamp(6px, 2vw, 10px);
+  font-size: clamp(0.78rem, 3vw, 1rem);
+  font-weight: 900;
+  line-height: 1.4;
+  color: #fff3d0;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 0 10px rgba(212, 175, 55, 0.25);
+}
+
+/* در حالت قفل کمی کم‌رنگ‌تر */
+.khan-card.is-locked .khan-card-title,
+.khan-card.is-locked .khan-card-name {
+  opacity: 0.8;
+}
+
+.khan-card.is-locked .khan-card-name {
+  color: #d9c8a3;
+}
+
+/* ستارهٔ پایین کارت */
+.khan-card-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: clamp(0.7rem, 2.6vw, 0.85rem);
+  font-weight: 800;
+  color: #ffd966;
+}
+
+.khan-card-stars svg {
+  width: clamp(14px, 4vw, 18px);
+  height: clamp(14px, 4vw, 18px);
+}
+
+/* landscape با ارتفاع کم */
+@media (max-height: 480px) and (orientation: landscape) {
+  .khan-card-title {
+    font-size: 0.62rem;
+    margin-top: 2px;
+  }
+
+  .khan-card-name {
+    font-size: 0.72rem;
+    margin-bottom: 2px;
+  }
+}
+
+.main-menu-container .side-menu .nav-tile .notif-dot {
+  top: 4px;
+  right: 6px;
+}
